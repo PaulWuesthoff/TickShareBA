@@ -1,8 +1,13 @@
-package com.example.tickshareba;
+package com.example.tickshareba.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.tickshareba.R;
+
+import net.sharksystem.asap.ASAP;
+
 
 public class MainActivity extends AppCompatActivity {
 
