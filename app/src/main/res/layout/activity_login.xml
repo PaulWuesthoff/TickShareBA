@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBackground">
+
+    <TextView
+        android:id="@+id/backgroundUserLogin"
+        android:layout_width="330dp"
+        android:layout_height="631dp"
+        android:background="@drawable/backgroundboxshape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/inputTextEmailAddressLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:accessibilityLiveRegion="none"
+        android:background="@drawable/roundinputtextfield"
+        android:ems="10"
+        android:hint="@string/hintEmailLogin"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundUserLogin"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundUserLogin"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="@+id/backgroundUserLogin"
+        app:layout_constraintTop_toBottomOf="@+id/textFieldLoginEmailAddress"
+        app:layout_constraintVertical_bias="0.074" />
+
+    <EditText
+        android:id="@+id/inputTextPasswordLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:accessibilityLiveRegion="none"
+        android:background="@drawable/roundinputtextfield"
+        android:ems="10"
+        android:hint="@string/hintPassword"
+        android:importantForAutofill="no"
+        android:inputType="textWebPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundUserLogin"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundUserLogin"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="@+id/backgroundUserLogin"
+        app:layout_constraintTop_toBottomOf="@+id/textFieldLoginPassword"
+        app:layout_constraintVertical_bias="0.081" />
+
+    <TextView
+        android:id="@+id/textFieldLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="@string/textFieldLogin"
+        android:textColor="@android:color/black"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundUserLogin"
+        app:layout_constraintHorizontal_bias="0.105"
+        app:layout_constraintStart_toStartOf="@+id/backgroundUserLogin"
+        app:layout_constraintTop_toTopOf="@+id/backgroundUserLogin" />
+
+    <TextView
+        android:id="@+id/textFieldLoginEmailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textfieldEmailAddress"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundUserLogin"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundUserLogin"
+        app:layout_constraintStart_toStartOf="@+id/backgroundUserLogin"
+        app:layout_constraintTop_toBottomOf="@+id/textFieldLogin"
+        app:layout_constraintVertical_bias="0.243" />
+
+    <TextView
+        android:id="@+id/textFieldLoginPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textfieldPassword"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundUserLogin"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundUserLogin"
+        app:layout_constraintStart_toStartOf="@+id/backgroundUserLogin"
+        app:layout_constraintTop_toBottomOf="@+id/textFieldLogin"
+        app:layout_constraintVertical_bias="0.426" />
+
+    <Button
+        android:id="@+id/buttonLoginPageBack"
+        android:layout_width="128dp"
+        android:layout_height="41dp"
+        android:background="@drawable/roundbutton"
+        android:onClick="onBack"
+        android:text="@string/buttonBack"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundUserLogin"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundUserLogin"
+        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintStart_toStartOf="@+id/backgroundUserLogin"
+        app:layout_constraintTop_toBottomOf="@+id/inputTextPasswordLogin"
+        app:layout_constraintVertical_bias="0.87" />
+
+    <Button
+        android:id="@+id/buttonLoginPageLogin"
+        android:layout_width="128dp"
+        android:layout_height="41dp"
+        android:background="@drawable/roundbutton"
+        android:onClick="onLogin"
+        android:text="@string/buttonLogin"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundUserLogin"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundUserLogin"
+        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintStart_toStartOf="@+id/backgroundUserLogin"
+        app:layout_constraintTop_toBottomOf="@+id/inputTextPasswordLogin"
+        app:layout_constraintVertical_bias="0.87" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

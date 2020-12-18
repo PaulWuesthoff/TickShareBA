@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBackground"
+    tools:context="com.activities.MainActivity">
+
+    <Button
+        android:id="@+id/buttonPlanYourTrip"
+        android:layout_width="305dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="104dp"
+        android:background="@drawable/roundbutton"
+        android:onClick="onPlanYourTrip"
+        android:text="@string/buttonPlanYourTrip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonCreateAnAccount"
+        android:layout_width="305dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="160dp"
+        android:background="@drawable/roundbutton"
+        android:clickable="true"
+        android:onClick="onRegister"
+        android:text="@string/buttonRegister"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonOfferATicket"
+        app:layout_constraintVertical_bias="0.178" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="112dp"
+        android:layout_height="129dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCreateAnAccount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonOfferATicket"
+        app:layout_constraintVertical_bias="0.629"
+        app:srcCompat="@drawable/train" />
+
+    <Button
+        android:id="@+id/buttonOfferATicket"
+        android:layout_width="305dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/roundbutton"
+        android:onClick="onOfferATrip"
+        android:text="@string/buttonOfferATicket"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonPlanYourTrip" />
+
+    <Button
+        android:id="@+id/buttonAlreadyRegistred"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="359dp"
+        android:layout_height="44dp"
+        android:background="@color/mainBackground"
+        android:text="@string/buttonAlreadyRegistred"
+        android:onClick="onLogin"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCreateAnAccount"
+        app:layout_constraintVertical_bias="0.322" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
