@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.tickshareba.management.TripManagerImpl;
 import com.tickshareba.management.UserManagerImpl;
+import com.tickshareba.persistence.PersistenceManagerDBHelper;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static UserManagerImpl userManager;
     public static TripManagerImpl tripManager;
+    public static PersistenceManagerDBHelper persistenceManagerDBHelper;
 
     protected static final Logger LOG = LogManager.getLogger(MainActivity.class);
 
@@ -38,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
 
     public static void showSuccessAlert(Context context, String succesAlert) {
         Toast.makeText(context, succesAlert, Toast.LENGTH_LONG).show();
+    }
+
+    public static void createPersistenceManager(Context context) {
+        persistenceManagerDBHelper = new PersistenceManagerDBHelper(context);
     }
 
 }

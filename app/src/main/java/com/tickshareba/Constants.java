@@ -5,12 +5,13 @@ import lombok.Getter;
 
 @AllArgsConstructor
 public enum Constants {
-    Email_Regex("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$"),
+    EMAIL_REGEX("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$"),
     INPUT_REGEX("^[A-Za-z, ]++$"),
-    Passwordlength("7"),
-    Date_Format("MMM dd,yyy HH:mm"),
+    DATE_FORMAT("MMM dd,yyy HH:mm"),
     AccountSuccess("Your account has been succsessfully registerd"),
-    Trip_Success("Your trip has been succsessfully created"),
+    TRIP_SUCCESS("Your trip has been succsessfully created"),
+    PASSWORD_LENGTH("8"),
+    LOGIN_SUCCESS("Logged in"),
     ;
 
     @Getter

@@ -2,7 +2,7 @@ package com.tickshareba.activities;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.UserManager;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -13,14 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.tickshareba.Constants;
 import com.tickshareba.R;
-import com.tickshareba.persistence.IPersistenceManager;
-import com.tickshareba.persistence.PersistenceManagerImpl;
 
 import java.util.Map;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
+
+    private String TAG = "RegisterActivity";
 
     private AlertDialog dialog;
 
@@ -32,6 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         initTextFields();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        MainActivity.createPersistenceManager(this);
 
     }
 
@@ -43,11 +43,16 @@ public class RegisterActivity extends AppCompatActivity {
         String userPassword = password.getEditableText().toString().trim();
         String userPasswordConfirm = password_confirm.getEditableText().toString().trim();
         if (checkUserData(userFirstName, userLastName, userRegion, userEmail, userPassword, userPasswordConfirm)) {
+
             MainActivity.showSuccessAlert(getApplicationContext(), Constants.AccountSuccess.getValue());
-            IPersistenceManager persistenceManager = new PersistenceManagerImpl(getApplicationContext());
+
             MainActivity.userManager.createUser(userFirstName, userLastName, userRegion, userEmail, userPassword);
-            System.out.println(persistenceManager.persistUser(MainActivity.userManager.getUserFromEmail(userEmail))+"##############");
-            System.out.println(persistenceManager.getUser("token").toString());
+
+            if(MainActivity.userManager.getUserFromEmail(userEmail)!= null) {
+                MainActivity.persistenceManagerDBHelper.persistUser(MainActivity.userManager.getUserFromEmail(userEmail));
+            }else {
+                Log.e(TAG, "something went wrong getting the user from his email Address: "+emailAddress);
+            }
             finish();
         } else {
             showErrorAlert(MainActivity.errorMap);
@@ -89,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
             MainActivity.errorMap.put("Region: ", "The region you´ve entered is not allowed !");
             retVal = false;
         }
-        if (!Pattern.matches(Constants.Email_Regex.getValue(), email)) {
+        if (!Pattern.matches(Constants.EMAIL_REGEX.getValue(), email)) {
             MainActivity.errorMap.put("Email Address: ", "The Email Address you´ve entered is not allowed !");
             retVal = false;
         }
@@ -114,5 +119,6 @@ public class RegisterActivity extends AppCompatActivity {
     public AlertDialog getAlertDialog() {
         return dialog;
     }
+
 
 }
