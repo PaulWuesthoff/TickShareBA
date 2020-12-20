@@ -12,11 +12,9 @@ import com.tickshareba.models.UserModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersistenceManagerDBHelper extends SQLiteOpenHelper implements IPersistenceManager {
+public class UserPersistenceManagerDBHelper extends SQLiteOpenHelper implements IUserPersistenceManager {
     public static final int DB_VERSION = 1;
     public static final String DB_NAME = "Users.db";
-
-    private final static String TAG = "DatabaseHelper";
 
     private final static String TABLE_NAME = "user";
     private final static String COL_ID = "ID";
@@ -28,7 +26,7 @@ public class PersistenceManagerDBHelper extends SQLiteOpenHelper implements IPer
     private final static String COL_TOKEN = "usertoken";
     private final static String COL_SALT = "salt";
 
-    public PersistenceManagerDBHelper(Context context) {
+    public UserPersistenceManagerDBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
@@ -81,7 +79,7 @@ public class PersistenceManagerDBHelper extends SQLiteOpenHelper implements IPer
         String querry = "SELECT " + COL_NAME + ", " + COL_LASTNAME + ", " + COL_REGION + ", "
                 + COL_EMAILADDRESS + ", " + COL_PASSWORDHASH + ", " + COL_TOKEN + ", "
                 + COL_SALT + " FROM " + TABLE_NAME + " WHERE " + COL_EMAILADDRESS + " = "
-                + "'"+emailAddress +"'"+ ";";
+                + "'" + emailAddress + "'" + ";";
 
         Cursor data = database.rawQuery(querry, null);
 
@@ -103,25 +101,9 @@ public class PersistenceManagerDBHelper extends SQLiteOpenHelper implements IPer
         return model;
     }
 
-
-    @Override
-    public boolean persistTrip(TripModel tripModel) {
-        return false;
-    }
-
-
-    @Override
-    public boolean getTrip(String userToken) {
-        return false;
-    }
-
     @Override
     public boolean deleteUser(UserModel userModel) {
         return false;
     }
 
-    @Override
-    public boolean deleteTrip(TripModel tripModel) {
-        return false;
-    }
 }

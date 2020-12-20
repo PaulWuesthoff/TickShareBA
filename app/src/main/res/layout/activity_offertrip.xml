@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBackground">
+
+    <TextView
+        android:id="@+id/backgroundOfferATrip"
+        android:layout_width="330dp"
+        android:layout_height="631dp"
+        android:background="@drawable/backgroundboxshape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewHeadlineOffer"
+        android:layout_width="134dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/textFieldOfferATrip"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/backgroundOfferATrip"
+        app:layout_constraintTop_toTopOf="@+id/backgroundOfferATrip" />
+
+    <TextView
+        android:id="@+id/textViewWhereDoYouStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:text="@string/textFieldwhereDoYouStart"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundOfferATrip"
+        app:layout_constraintStart_toStartOf="@+id/backgroundOfferATrip"
+        app:layout_constraintTop_toBottomOf="@+id/textViewHeadlineOffer" />
+
+    <TextView
+        android:id="@+id/textViewWhenDoYouStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:text="@string/textFieldwhenDoYouStart"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundOfferATrip"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="@+id/backgroundOfferATrip"
+        app:layout_constraintTop_toBottomOf="@+id/inputTextWhereDouYouStart" />
+
+    <EditText
+        android:id="@+id/inputTextWhereDouYouStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/roundinputtextfield"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundOfferATrip"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="@+id/backgroundOfferATrip"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWhereDoYouStart" />
+
+    <EditText
+        android:id="@+id/inputTextWhenDoYouStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/roundinputtextfield"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundOfferATrip"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="@+id/backgroundOfferATrip"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWhenDoYouStart" />
+
+    <Button
+        android:id="@+id/buttonNow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/roundbutton"
+        android:backgroundTint="@color/white"
+        android:onClick="onDateNowClick"
+        android:text="@string/buttonNow"
+        app:layout_constraintStart_toStartOf="@+id/backgroundOfferATrip"
+        app:layout_constraintTop_toBottomOf="@+id/inputTextWhenDoYouStart" />
+
+    <Button
+        android:id="@+id/buttonDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/roundbutton"
+        android:backgroundTint="@color/white"
+        android:onClick="onDateClick"
+        android:text="@string/buttonDate"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundOfferATrip"
+        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintStart_toEndOf="@+id/buttonNow"
+        app:layout_constraintTop_toBottomOf="@+id/inputTextWhenDoYouStart" />
+
+    <TextView
+        android:id="@+id/textViewHowmanySeatsLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:text="@string/textFieldseatsLeft"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundOfferATrip"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="@+id/backgroundOfferATrip"
+        app:layout_constraintTop_toBottomOf="@+id/inputTextWhenDoYouStart" />
+
+    <EditText
+        android:id="@+id/inputTextHowManySeatsLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/roundinputtextfield"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundOfferATrip"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="@+id/backgroundOfferATrip"
+        app:layout_constraintTop_toBottomOf="@+id/textViewHowmanySeatsLeft" />
+
+    <EditText
+        android:id="@+id/inputTextWhereDoYouWantToGo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/roundinputtextfield"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundOfferATrip"
+        app:layout_constraintStart_toStartOf="@+id/backgroundOfferATrip"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/buttonOfferNow"
+        android:layout_width="131dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/roundbutton"
+        android:onClick="onOfferNow"
+        android:text="@string/buttonOfferNow"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundOfferATrip"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundOfferATrip"
+        app:layout_constraintHorizontal_bias="0.917"
+        app:layout_constraintStart_toStartOf="@+id/backgroundOfferATrip" />
+
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="131dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/roundbutton"
+        android:onClick="onBackClick"
+        android:text="@string/buttonBack"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundOfferATrip"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundOfferATrip"
+        app:layout_constraintHorizontal_bias="0.105"
+        app:layout_constraintStart_toStartOf="@+id/backgroundOfferATrip" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/texfieldWhereDoYouWantToGo"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundOfferATrip"
+        app:layout_constraintStart_toStartOf="@+id/backgroundOfferATrip"
+        app:layout_constraintTop_toBottomOf="@+id/inputTextWhereDouYouStart" />
+
+    <Button
+        android:id="@+id/buttonTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/roundbutton"
+        android:backgroundTint="#FFFFFF"
+        android:onClick="onTimeClick"
+        android:text="@string/buttonTime"
+        app:layout_constraintStart_toEndOf="@+id/buttonDate"
+        app:layout_constraintTop_toBottomOf="@+id/inputTextWhenDoYouStart" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

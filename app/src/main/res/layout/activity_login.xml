@@ -96,7 +96,7 @@
         android:layout_width="128dp"
         android:layout_height="41dp"
         android:background="@drawable/roundbutton"
-        android:onClick="onBack"
+        android:onClick="onBackClick"
         android:text="@string/buttonBack"
         app:layout_constraintBottom_toBottomOf="@+id/backgroundUserLogin"
         app:layout_constraintEnd_toEndOf="@+id/backgroundUserLogin"

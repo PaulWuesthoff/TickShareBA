@@ -10,13 +10,22 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TripModel {
-    private long id;
+    private String id;
     private String startingLocation;
     private String destination;
     private String startingTime;
     private String seatsLeft;
     private String userToken;
 
+
+
+    public TripModel(String startingLocation, String destination, String startingTime, String seatsLeft, String userToken){
+        this.startingLocation = startingLocation;
+        this.destination = destination;
+        this.startingTime = startingTime;
+        this.seatsLeft = seatsLeft;
+        this.userToken = userToken;
+    }
     /**
      * Creates a Model for unregisterd users
      * @param startingLocation
@@ -31,11 +40,10 @@ public class TripModel {
         this.seatsLeft = seatsLeft;
     }
 
-    /**
-     * Checks if a user is logged in or not, if not the Usertoken would be empty
-     * @return true if user is logged in, false if user isnt
-     */
-    public boolean isUserLoggedIn(){
-        return StringUtils.isNotEmpty(userToken);
+    @Override
+    public String toString(){
+        return "Id: "+id +", Starting location: "+startingLocation+", Destination: "+destination+
+                ", Starting Time: "+startingTime+", Seats left: "+seatsLeft+", userToken: "+userToken;
     }
+
 }

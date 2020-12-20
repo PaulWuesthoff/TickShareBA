@@ -43,12 +43,7 @@ public class UserManagerImpl implements IUserManager {
 
     @Override
     public UserModel getUserFromEmail(String emailAddress) {
-        for (UserModel userModel : userList) {
-            if (userModel.getEmailAddress().equals(emailAddress)) {
-                return userModel;
-            }
-        }
-        return null;
+        return userList.stream().filter(user -> user.getEmailAddress().equals(emailAddress)).findAny().orElse(null);
     }
 
     @Override

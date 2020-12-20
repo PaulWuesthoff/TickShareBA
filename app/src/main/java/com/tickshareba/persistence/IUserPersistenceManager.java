@@ -3,7 +3,7 @@ package com.tickshareba.persistence;
 import com.tickshareba.models.TripModel;
 import com.tickshareba.models.UserModel;
 
-public interface IPersistenceManager {
+public interface IUserPersistenceManager {
     //TODO: add Javadoc descriptions here
 
     /**
@@ -15,24 +15,10 @@ public interface IPersistenceManager {
 
     /**
      *
-     * @param tripModel
-     * @return
-     */
-    public boolean persistTrip(TripModel tripModel);
-
-    /**
-     *
      * @param userToken
      * @return
      */
     public UserModel getUser(String userToken);
-
-    /**
-     *
-     * @param userToken
-     * @return
-     */
-    public boolean getTrip(String userToken);
 
     /**
      *
@@ -41,10 +27,4 @@ public interface IPersistenceManager {
      */
     public boolean deleteUser(UserModel userModel);
 
-    /**
-     *
-     * @param tripModel
-     * @return
-     */
-    public boolean deleteTrip(TripModel tripModel);
 }

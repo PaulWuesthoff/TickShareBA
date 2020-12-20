@@ -48,11 +48,12 @@ public class RegisterActivity extends AppCompatActivity {
 
             MainActivity.userManager.createUser(userFirstName, userLastName, userRegion, userEmail, userPassword);
 
-            if(MainActivity.userManager.getUserFromEmail(userEmail)!= null) {
-                MainActivity.persistenceManagerDBHelper.persistUser(MainActivity.userManager.getUserFromEmail(userEmail));
-            }else {
-                Log.e(TAG, "something went wrong getting the user from his email Address: "+emailAddress);
+            if (MainActivity.userManager.getUserFromEmail(userEmail) != null) {
+                MainActivity.userPersistenceManagerDBHelper.persistUser(MainActivity.userManager.getUserFromEmail(userEmail));
+            } else {
+                Log.e(TAG, "something went wrong getting the user from his email Address: " + emailAddress);
             }
+            MainActivity.setUserState(UserState.LOGGED_IN);
             finish();
         } else {
             showErrorAlert(MainActivity.errorMap);

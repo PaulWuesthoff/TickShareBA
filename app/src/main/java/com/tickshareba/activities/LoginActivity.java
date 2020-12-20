@@ -17,8 +17,6 @@ import com.tickshareba.models.UserModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Map;
-
 public class LoginActivity extends AppCompatActivity {
 
     private static final Logger LOG = LogManager.getLogger(LoginActivity.class);
@@ -32,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setupTextFields();
-        if (MainActivity.persistenceManagerDBHelper == null) {
+        if (MainActivity.userPersistenceManagerDBHelper == null) {
             MainActivity.createPersistenceManager(this);
         }
 
@@ -45,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                 MainActivity.userManager.getUserList().add(getUserData());
                 System.out.println(getUserData().toString());
                 MainActivity.showSuccessAlert(this, Constants.LOGIN_SUCCESS.getValue());
+                MainActivity.setUserState(UserState.LOGGED_IN);
                 finish();
             }else{
                 showErrorAlert("Wrong Email or Password! Please try again. ");
@@ -56,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private UserModel getUserData() {
-        return MainActivity.persistenceManagerDBHelper.getUser(textFieldEmail.getText().toString().trim());
+        return MainActivity.userPersistenceManagerDBHelper.getUser(textFieldEmail.getText().toString().trim());
 
     }
 
