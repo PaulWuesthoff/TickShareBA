@@ -107,7 +107,27 @@ public class TripPersistenceManagerDBHelper extends SQLiteOpenHelper implements 
 
     @Override
     public boolean deleteTrip(TripModel tripModel) {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        if (tripModel.getId() != null){
+            String deleteStatement = "DELETE FROM " + TABLE_NAME + " WHERE " + COL_ID + " = " + tripModel.getId() + ";";
+            database.execSQL(deleteStatement);
+            return true;
+        }
+
+        LOG.error("There was a problem while deleting a TRIP, Tripmodelstate:  "+tripModel.toString());
+
         return false;
+    }
+
+    @Override
+    public void deleteOldTrips() {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        String deleteStatement = "DELETE FROM " + TABLE_NAME + " WHERE " + COL_STARTINGTIME + " < " + "date(now);";
+
+        database.execSQL(deleteStatement);
+
     }
 
     private String getLastID() {

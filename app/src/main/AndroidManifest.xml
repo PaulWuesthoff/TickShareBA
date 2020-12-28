@@ -20,6 +20,9 @@
         <activity android:name=".activities.RegisterActivity"/>
         <activity android:name=".activities.OfferTripActivity"/>
         <activity android:name=".activities.PlanTripActivity"/>
+        <activity android:name=".activities.asaphandling.ASAPExampleMessagingActivity"/>
+        <activity android:name=".activities.asaphandling.ASAPExampleActivity"/>
+        <activity android:name=".activities.asaphandling.ASAPInitialExampleActivity"/>
 
     </application>
 

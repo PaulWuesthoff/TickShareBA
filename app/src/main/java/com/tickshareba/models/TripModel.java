@@ -10,6 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TripModel {
+
     private String id;
     private String startingLocation;
     private String destination;
@@ -17,15 +18,6 @@ public class TripModel {
     private String seatsLeft;
     private String userToken;
 
-
-
-    public TripModel(String startingLocation, String destination, String startingTime, String seatsLeft, String userToken){
-        this.startingLocation = startingLocation;
-        this.destination = destination;
-        this.startingTime = startingTime;
-        this.seatsLeft = seatsLeft;
-        this.userToken = userToken;
-    }
     /**
      * Creates a Model for unregisterd users
      * @param startingLocation

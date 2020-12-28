@@ -21,20 +21,5 @@ public interface IUserManager {
      */
     public UserModel getUserFromEmail(String emailAddress);
 
-    /**
-     * persists the created Usermodel into SQLite
-     * @param user
-     * @return
-     */
-    public boolean persistUser(UserModel user);
-
-    /**
-     * deletes ab user from the database
-     * @param user
-     * @return
-     */
-    public boolean deleteUser(UserModel user);
-
-
 
 }

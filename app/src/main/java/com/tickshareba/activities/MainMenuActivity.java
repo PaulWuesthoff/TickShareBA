@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.tickshareba.R;
+import com.tickshareba.activities.asaphandling.ASAPInitialExampleActivity;
 
 public class MainMenuActivity extends AppCompatActivity {
 
@@ -36,7 +37,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void onPlanTrip(View view) {
-        Intent intent = new Intent(this, PlanTripActivity.class);
+        Intent intent = new Intent(this, ASAPInitialExampleActivity.class);
         try {
             startActivity(intent);
         } catch (Exception e) {

@@ -3,6 +3,7 @@ package com.tickshareba.management;
 import com.tickshareba.Constants;
 import com.tickshareba.authentication.Validator;
 import com.tickshareba.models.UserModel;
+import com.tickshareba.persistence.UserPersistenceManagerDBHelper;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class UserManagerImpl implements IUserManager {
 
     private static final Logger LOG = LogManager.getLogger(UserManagerImpl.class);
+
 
     @Getter
     private List<UserModel> userList;
@@ -45,17 +47,6 @@ public class UserManagerImpl implements IUserManager {
     public UserModel getUserFromEmail(String emailAddress) {
         return userList.stream().filter(user -> user.getEmailAddress().equals(emailAddress)).findAny().orElse(null);
     }
-
-    @Override
-    public boolean persistUser(UserModel user) {
-        return false;
-    }
-
-    @Override
-    public boolean deleteUser(UserModel user) {
-        return false;
-    }
-
 
     private String formatToUpperCase(String toUpperCase) {
         String nameToUpperCase = Character.toUpperCase(toUpperCase.charAt(0)) + toUpperCase.substring(1);

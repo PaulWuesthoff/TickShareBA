@@ -53,7 +53,7 @@ public class OfferTripActivity extends AppCompatActivity {
                 showErrorAlert();
                 finish();
             }
-            if (MainActivity.tripManager.createTrip(locationString, destinationString, startingTimString, seatsLeftString, userModel.getToken())) {
+            if (MainActivity.tripManager.createTrip( null, locationString, destinationString, startingTimString, seatsLeftString, userModel.getToken())) {
                 MainActivity.showSuccessAlert(this, Constants.TRIP_SUCCESS.getValue());
                 System.out.println(MainActivity.tripPersistenceManager.persistTrip(MainActivity.tripManager.getTripList().get(0))+"##########");
                 MainActivity.tripManager.getTripList().clear();

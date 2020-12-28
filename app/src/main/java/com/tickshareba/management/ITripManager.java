@@ -13,7 +13,7 @@ public interface ITripManager{
      * @param userToken
      * @return
      */
-    public boolean createTrip(String startingLocation, String destination, String startingTime, String seatsLeft, String userToken);
+    public boolean createTrip(String ID, String startingLocation, String destination, String startingTime, String seatsLeft, String userToken);
 
     /**
      *
@@ -24,20 +24,5 @@ public interface ITripManager{
      * @return
      */
     public boolean createTripWithouUserToken(String startingLocation, String destination, String startingTime, String seatsLeft);
-
-    /**
-     *
-     * @param trip
-     * @return
-     */
-    public boolean persistTrip(TripModel trip);
-
-    /**
-     *
-     * @param trip
-     * @return
-     */
-    public boolean deleteTrip(TripModel trip);
-
 
 }

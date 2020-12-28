@@ -25,4 +25,9 @@ public interface ITripPersistenceManager {
      * @return
      */
     public boolean deleteTrip(TripModel tripModel);
+
+    /**
+     *
+     */
+    public void deleteOldTrips();
 }
