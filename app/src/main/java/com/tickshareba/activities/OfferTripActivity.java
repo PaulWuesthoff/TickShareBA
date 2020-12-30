@@ -45,7 +45,7 @@ public class OfferTripActivity extends AppCompatActivity {
 
         String locationString = startingLocation.getText().toString().trim();
         String destinationString = destination.getText().toString().trim();
-        String startingTimString = startingTime.getText().toString().trim();
+        String startingTimeString = startingTime.getText().toString().trim();
         String seatsLeftString = seatsLeft.getText().toString().trim();
 
         if (MainActivity.getUserState().equals(UserState.LOGGED_IN)) {
@@ -53,7 +53,7 @@ public class OfferTripActivity extends AppCompatActivity {
                 showErrorAlert();
                 finish();
             }
-            if (MainActivity.tripManager.createTrip( null, locationString, destinationString, startingTimString, seatsLeftString, userModel.getToken())) {
+            if (MainActivity.tripManager.createTrip( null, locationString, destinationString, startingTimeString, seatsLeftString, userModel.getToken())) {
                 MainActivity.showSuccessAlert(this, Constants.TRIP_SUCCESS.getValue());
                 System.out.println(MainActivity.tripPersistenceManager.persistTrip(MainActivity.tripManager.getTripList().get(0))+"##########");
                 MainActivity.tripManager.getTripList().clear();
@@ -62,7 +62,7 @@ public class OfferTripActivity extends AppCompatActivity {
                 showErrorAlert();
             }
         } else if(MainActivity.getUserState().equals(UserState.LOGGED_OUT)){
-            if (MainActivity.tripManager.createTripWithouUserToken(locationString, destinationString, startingTimString, seatsLeftString)) {
+            if (MainActivity.tripManager.createTripWithouUserToken(locationString, destinationString, startingTimeString, seatsLeftString)) {
                 MainActivity.showSuccessAlert(this, Constants.TRIP_SUCCESS.getValue());
                 System.out.println(MainActivity.tripPersistenceManager.persistTrip(MainActivity.tripManager.getTripList().get(0))+"##########");
                 MainActivity.tripManager.getTripList().clear();

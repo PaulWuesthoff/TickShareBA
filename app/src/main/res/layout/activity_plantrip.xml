@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBackground">
+
+    <TextView
+        android:id="@+id/backgroundPlanTrip"
+        android:layout_width="330dp"
+        android:layout_height="631dp"
+        android:background="@drawable/backgroundboxshape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.69" />
+
+    <TextView
+        android:id="@+id/textViewHeadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="@string/textFieldPlanYourTrip"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundPlanTrip"
+        app:layout_constraintHorizontal_bias="0.167"
+        app:layout_constraintStart_toStartOf="@+id/backgroundPlanTrip"
+        app:layout_constraintTop_toTopOf="@+id/backgroundPlanTrip" />
+
+    <TextView
+        android:id="@+id/textViewWhereToGo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="@string/texfieldWhereDoYouWantToGo"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundPlanTrip"
+        app:layout_constraintStart_toStartOf="@+id/backgroundPlanTrip"
+        app:layout_constraintTop_toBottomOf="@+id/textViewHeadline" />
+
+    <EditText
+        android:id="@+id/editTextWhereToGo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/roundinputtextfield"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundPlanTrip"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="@+id/backgroundPlanTrip"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWhereToGo" />
+
+    <TextView
+        android:id="@+id/textViewWhereToStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/textFieldWhereDoYouWantToStart"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundPlanTrip"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="@+id/backgroundPlanTrip"
+        app:layout_constraintTop_toBottomOf="@+id/editTextWhereToGo" />
+
+    <EditText
+        android:id="@+id/editTextWhereDoYouWantToStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/roundinputtextfield"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundPlanTrip"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="@+id/backgroundPlanTrip"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWhereToStart" />
+
+    <TextView
+        android:id="@+id/textViewWhenDoYouWantToGo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/textFieldWhen"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundPlanTrip"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="@+id/backgroundPlanTrip"
+        app:layout_constraintTop_toBottomOf="@+id/editTextWhereDoYouWantToStart" />
+
+    <EditText
+        android:id="@+id/editTextWhenDoYouWantToGo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/roundinputtextfield"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundPlanTrip"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="@+id/backgroundPlanTrip"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWhenDoYouWantToGo" />
+
+    <Button
+        android:id="@+id/buttonNow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/roundbutton"
+        android:backgroundTint="@color/white"
+        android:onClick="onDateNowClick"
+        android:text="@string/buttonNow"
+        app:layout_constraintStart_toStartOf="@+id/backgroundPlanTrip"
+        app:layout_constraintTop_toBottomOf="@+id/editTextWhenDoYouWantToGo" />
+
+    <Button
+        android:id="@+id/buttonDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="120dp"
+        android:background="@drawable/roundbutton"
+        android:backgroundTint="@color/white"
+        android:onClick="onDateClick"
+        android:text="@string/buttonDate"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundPlanTrip"
+        app:layout_constraintStart_toEndOf="@+id/buttonNow"
+        app:layout_constraintTop_toBottomOf="@+id/editTextWhenDoYouWantToGo" />
+
+    <Button
+        android:id="@+id/buttonTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/roundbutton"
+        android:backgroundTint="@color/white"
+        android:onClick="onTimeClick"
+        android:text="@string/buttonTime"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundPlanTrip"
+        app:layout_constraintStart_toEndOf="@+id/buttonDate"
+        app:layout_constraintTop_toBottomOf="@+id/editTextWhenDoYouWantToGo" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="122dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/roundbutton"
+        android:onClick="onButtonSearchClick"
+        android:text="@string/buttonSearch"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundPlanTrip"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundPlanTrip"
+        app:layout_constraintHorizontal_bias="0.889"
+        app:layout_constraintStart_toStartOf="@+id/backgroundPlanTrip" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

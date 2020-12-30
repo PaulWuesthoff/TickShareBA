@@ -32,7 +32,11 @@ public class TripManagerImpl implements ITripManager {
 
     @Override
     public boolean createTripWithouUserToken(String startingLocation, String destination, String startingTime, String seatsLeft) {
-        return tripList.add(new TripModel(startingLocation, destination, startingTime, seatsLeft));
+        if(checkTripValuesWithoutToken(startingLocation, destination, startingTime, seatsLeft)){
+            return tripList.add(new TripModel(startingLocation, destination, startingTime, seatsLeft));
+        }
+        LOG.error("Error while creating trip with values: startinglocation: "+startingLocation+", destination: "+ destination  );
+        return false;
     }
 
     private boolean checkTripValuesWithToken(String ID, String startingLocation, String destination, String startingTime, String seatsLeft, String userToken) {
@@ -71,7 +75,7 @@ public class TripManagerImpl implements ITripManager {
         return returnVal;
     }
 
-    private boolean checkTripValuesWithoutToken(String ID, String startingLocation, String destination, String startingTime, String seatsLeft) {
+    private boolean checkTripValuesWithoutToken(String startingLocation, String destination, String startingTime, String seatsLeft) {
         Boolean returnVal = true;
         Date date = null;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constants.DATE_FORMAT.getValue());

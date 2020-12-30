@@ -2,6 +2,8 @@ package com.tickshareba.persistence;
 
 import com.tickshareba.models.TripModel;
 
+import java.util.List;
+
 public interface ITripPersistenceManager {
 
 
@@ -30,4 +32,10 @@ public interface ITripPersistenceManager {
      *
      */
     public void deleteOldTrips();
+
+    /**
+     *
+     * @return
+     */
+    public List<TripModel> getAllTrips();
 }

@@ -1,18 +1,19 @@
-package com.tickshareba.activities.asaphandling;
+package com.tickshareba.activities;
 
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.tickshareba.R;
+import com.tickshareba.models.TripModel;
 
 import net.sharksystem.asap.ASAPException;
 import net.sharksystem.asap.android.apps.ASAPMessageReceivedListener;
 import net.sharksystem.asap.ASAPMessages;
-import net.sharksystem.asap.android.example.ASAPExampleRootActivity;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import java.util.List;
 import static net.sharksystem.asap.android.example.ASAPExampleApplication.ASAP_EXAMPLE_APPNAME;
 
 public class ASAPExampleMessagingActivity extends ASAPExampleRootActivity {
-    private static final CharSequence EXAMPLE_URI ="asap://exampleURI";
+    private static final CharSequence EXAMPLE_URI = "asap://exampleURI";
     private static final CharSequence EXAMPLE_MESSAGE = "ASAP example message";
     private ASAPMessageReceivedListener receivedListener;
     private List<String> sentMessages = new ArrayList<>();
@@ -30,9 +31,8 @@ public class ASAPExampleMessagingActivity extends ASAPExampleRootActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //super.onCreate(savedInstanceState);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.example_messaging_layout);
+        setContentView(R.layout.activity_offertrip);
 
         // set URI - your app can or your users can choose any valid uri.
         TextView uriTextView = findViewById(R.id.exampleMessagingUri);
@@ -71,13 +71,19 @@ public class ASAPExampleMessagingActivity extends ASAPExampleRootActivity {
 
     // send ASAP message
     public void onSendClick(View view) {
-        EditText messageEditView = findViewById(R.id.exampleMessagingMessageText);
-        Editable messageText = messageEditView.getText();
+        MainActivity.tripManager.createTripWithouUserToken("Hamburg", "Berlin", "Today", "4");
+        List<TripModel> trips = MainActivity.tripManager.getTripList();
+//        EditText messageEditView = findViewById(R.id.exampleMessagingMessageText);
+//        Editable messageText = messageEditView.getText();
 
-        Log.d(this.getLogStart(), "going to send message: " + messageText);
+//        Log.d(this.getLogStart(), "going to send message: " + messageText);
 
         // asap messages are bytes
-        byte[] byteContent = messageText.toString().getBytes();
+//        byte[] byteContent = messageText.toString().getBytes();
+
+        Gson gson = new Gson();
+        String tripsToString = gson.toJson(trips);
+        byte[] byteContent = tripsToString.getBytes();
 
         Log.d(this.getLogStart(), "going to send messageBytes: " + byteContent);
 
@@ -92,7 +98,7 @@ public class ASAPExampleMessagingActivity extends ASAPExampleRootActivity {
         }
 
         // success - remember sent message
-        this.sentMessages.add(messageText.toString());
+//        this.sentMessages.add(messageText.toString());
     }
 
     // handle incoming messages
@@ -106,18 +112,18 @@ public class ASAPExampleMessagingActivity extends ASAPExampleRootActivity {
         try {
             Iterator<CharSequence> messagesAsCharSequence = asapMessages.getMessagesAsCharSequence();
             sb.append("new messages:\n");
-            while(messagesAsCharSequence.hasNext()) {
+            while (messagesAsCharSequence.hasNext()) {
                 String receivedMessage = messagesAsCharSequence.next().toString();
                 this.receivedMessages.add(receivedMessage);
                 sb.append(receivedMessage);
             }
             sb.append("your messages: \n");
-            for(String msg : this.sentMessages) {
+            for (String msg : this.sentMessages) {
                 sb.append(msg);
                 sb.append("\n");
             }
             sb.append("received messages: \n");
-            for(String msg : this.receivedMessages) {
+            for (String msg : this.receivedMessages) {
                 sb.append(msg);
             }
         } catch (IOException e) {

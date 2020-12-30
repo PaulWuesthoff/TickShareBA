@@ -1,4 +1,4 @@
-package com.tickshareba.activities.asaphandling;
+package com.tickshareba.activities;
 
 import android.app.Activity;
 

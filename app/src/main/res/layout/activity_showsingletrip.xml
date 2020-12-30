@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBackground">
+
+    <TextView
+        android:id="@+id/backgroundShowSingleTrip"
+        android:layout_width="330dp"
+        android:layout_height="618dp"
+        android:background="@drawable/backgroundboxshape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.495" />
+
+    <Button
+        android:id="@+id/buttonSingleTripBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/roundbutton"
+        android:onClick="onButtonBackClick"
+        android:text="@string/buttonBack"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundShowSingleTrip"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSingleTripAccept"
+        app:layout_constraintHorizontal_bias="0.431"
+        app:layout_constraintStart_toStartOf="@+id/backgroundShowSingleTrip" />
+
+    <Button
+        android:id="@+id/buttonSingleTripAccept"
+        android:layout_width="115dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/roundbutton"
+        android:text="@string/buttonAcceptTrip"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundShowSingleTrip"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundShowSingleTrip" />
+
+    <TextView
+        android:id="@+id/textViewShowSingleTripInformation"
+        android:layout_width="276dp"
+        android:layout_height="163dp"
+        android:layout_marginTop="92dp"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundShowSingleTrip"
+        app:layout_constraintStart_toStartOf="@+id/backgroundShowSingleTrip"
+        app:layout_constraintTop_toTopOf="@+id/backgroundShowSingleTrip" />
+</androidx.constraintlayout.widget.ConstraintLayout>

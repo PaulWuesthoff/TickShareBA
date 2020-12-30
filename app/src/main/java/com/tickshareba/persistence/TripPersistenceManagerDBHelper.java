@@ -63,7 +63,7 @@ public class TripPersistenceManagerDBHelper extends SQLiteOpenHelper implements 
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_STARTINGLOCATION, tripModel.getStartingLocation());
         contentValues.put(COL_DESTINATION, tripModel.getDestination());
-        contentValues.put(COL_STARTINGTIME, tripModel.getStartingLocation());
+        contentValues.put(COL_STARTINGTIME, tripModel.getStartingTime());
         contentValues.put(COL_SEATSLEFT, tripModel.getSeatsLeft());
         contentValues.put(COL_USERTOKEN, tripModel.getUserToken());
         long result = database.insert(TABLE_NAME, null, contentValues);
@@ -103,6 +103,26 @@ public class TripPersistenceManagerDBHelper extends SQLiteOpenHelper implements 
 
 
         return model;
+    }
+
+
+    public List<TripModel> getAllTrips(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String querry = "SELECT * FROM "+ TABLE_NAME+";";
+        Cursor data = database.rawQuery(querry, null);
+
+        List<TripModel> trips = new ArrayList<>();
+
+        while (data.moveToNext()){
+            String id = data.getString(0);
+            String startingLocation = data.getString(1);
+            String destination = data.getString(2);
+            String startingTime = data.getString(3);
+            String seatsLeft = data.getString(4);
+            String userToken = data.getString(5);
+            trips.add(new TripModel(id, startingLocation, destination, startingTime, seatsLeft, userToken));
+        }
+        return trips;
     }
 
     @Override
