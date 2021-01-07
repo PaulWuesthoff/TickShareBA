@@ -22,7 +22,6 @@ public class ASAPExampleApplication extends ASAPApplication {
             ASAPExampleApplication.instance = new ASAPExampleApplication(formats, initialActivity);
 
             // there could be some other steps. Setting up sub components. But there are non here.
-
             // launch
             ASAPExampleApplication.instance.startASAPApplication();
         } // else - already initialized - nothing happens.
@@ -34,6 +33,7 @@ public class ASAPExampleApplication extends ASAPApplication {
         super(formats, initialActivity);
 
         this.id = ASAP.createUniqueID();
+
     }
 
     public CharSequence getOwnerID() {

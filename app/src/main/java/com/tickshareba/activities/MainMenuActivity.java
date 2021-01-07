@@ -27,19 +27,17 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void onLogin(View view) {
-        Intent intent = new Intent(this, LoginActivity.class);
-        try {
-            startActivity(intent);
+        ASAPExampleApplication.initializeASAPExampleApplication(this);
+
+        Intent intent = new Intent(this, ASAPExampleMessagingActivity.class);
+            try {
+                startActivity(intent);
         } catch (Exception e) {
             MainActivity.LOG.error("oops something went wrong: ", e);
         }
     }
 
     public void onPlanTrip(View view) {
-
-        ASAPExampleApplication.initializeASAPExampleApplication(this);
-
-
         Intent intent = new Intent(this, PlanTripActivity.class);
         try {
             startActivity(intent);
