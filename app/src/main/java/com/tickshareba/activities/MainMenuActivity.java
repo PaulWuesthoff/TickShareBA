@@ -27,9 +27,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void onLogin(View view) {
-        ASAPExampleApplication.initializeASAPExampleApplication(this);
-
-        Intent intent = new Intent(this, ASAPExampleMessagingActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
             try {
                 startActivity(intent);
         } catch (Exception e) {
@@ -38,6 +36,8 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void onPlanTrip(View view) {
+        ASAPExampleApplication.initializeASAPExampleApplication(this);
+
         Intent intent = new Intent(this, PlanTripActivity.class);
         try {
             startActivity(intent);
@@ -47,6 +47,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void onOfferTrip(View view) {
+        ASAPExampleApplication.initializeASAPExampleApplication(this);
         Intent intent = new Intent(this, OfferTripActivity.class);
         try {
             startActivity(intent);

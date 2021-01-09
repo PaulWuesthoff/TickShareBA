@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.69" />
+        app:layout_constraintVertical_bias="0.39" />
 
     <TextView
         android:id="@+id/textViewHeadline"
@@ -157,6 +157,19 @@
         app:layout_constraintBottom_toBottomOf="@+id/backgroundPlanTrip"
         app:layout_constraintEnd_toEndOf="@+id/backgroundPlanTrip"
         app:layout_constraintHorizontal_bias="0.889"
+        app:layout_constraintStart_toStartOf="@+id/backgroundPlanTrip" />
+
+    <Button
+        android:id="@+id/buttonback"
+        android:layout_width="122dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/roundbutton"
+        android:onClick="onButtonBackClick"
+        android:text="@string/buttonBack"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundPlanTrip"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundPlanTrip"
+        app:layout_constraintHorizontal_bias="0.129"
         app:layout_constraintStart_toStartOf="@+id/backgroundPlanTrip" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

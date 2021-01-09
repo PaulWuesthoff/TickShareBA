@@ -144,7 +144,8 @@ public class TripPersistenceManagerDBHelper extends SQLiteOpenHelper implements 
     public void deleteOldTrips() {
         SQLiteDatabase database = this.getWritableDatabase();
 
-        String deleteStatement = "DELETE FROM " + TABLE_NAME + " WHERE " + COL_STARTINGTIME + " < " + "date(now);";
+        //String deleteStatement = "DELETE FROM " + TABLE_NAME + " WHERE " + COL_STARTINGTIME + " < " + "DATE();";
+        String deleteStatement = "DELETE FROM "+ TABLE_NAME+";";
 
         database.execSQL(deleteStatement);
 

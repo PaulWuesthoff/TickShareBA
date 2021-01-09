@@ -1,22 +1,26 @@
 package com.tickshareba.activities;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.tickshareba.Constants;
 import com.tickshareba.R;
 import com.tickshareba.models.TripModel;
 
 import net.sharksystem.asap.ASAPException;
-import net.sharksystem.asap.android.apps.ASAPMessageReceivedListener;
 import net.sharksystem.asap.ASAPMessages;
+import net.sharksystem.asap.apps.ASAPMessageReceivedListener;
 
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -32,7 +36,7 @@ public class ASAPExampleMessagingActivity extends ASAPExampleRootActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_offertrip);
+        setContentView(R.layout.example_messaging_layout);
 
         // set URI - your app can or your users can choose any valid uri.
         TextView uriTextView = findViewById(R.id.exampleMessagingUri);
@@ -52,6 +56,7 @@ public class ASAPExampleMessagingActivity extends ASAPExampleRootActivity {
         };
 
         // set listener to get informed about newly arrived messages
+        Log.d(getLogStart(), " activating listener");
         this.getASAPApplication().addASAPMessageReceivedListener(
                 ASAP_EXAMPLE_APPNAME, // listen to this app
                 this.receivedListener);
@@ -71,21 +76,24 @@ public class ASAPExampleMessagingActivity extends ASAPExampleRootActivity {
 
     // send ASAP message
     public void onSendClick(View view) {
-        MainActivity.tripManager.createTripWithouUserToken("Hamburg", "Berlin", "Today", "4");
+        long millis = System.currentTimeMillis();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constants.DATE_FORMAT.getValue());
+        Date date = new Date(millis);
+        MainActivity.tripManager.createTripWithouUserToken("Hamburg", "Berlin", simpleDateFormat.format(date), "4");
         List<TripModel> trips = MainActivity.tripManager.getTripList();
 //        EditText messageEditView = findViewById(R.id.exampleMessagingMessageText);
 //        Editable messageText = messageEditView.getText();
-
+//
 //        Log.d(this.getLogStart(), "going to send message: " + messageText);
 
-        // asap messages are bytes
+         //asap messages are bytes
 //        byte[] byteContent = messageText.toString().getBytes();
 
         Gson gson = new Gson();
         String tripsToString = gson.toJson(trips);
         byte[] byteContent = tripsToString.getBytes();
 
-        Log.d(this.getLogStart(), "going to send messageBytes: " + byteContent);
+        Log.d(this.getLogStart(), "going to send messageBytes: " + byteContent.toString());
 
         try {
             this.sendASAPMessage(

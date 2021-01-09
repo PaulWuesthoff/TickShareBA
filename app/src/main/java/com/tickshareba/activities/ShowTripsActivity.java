@@ -25,10 +25,10 @@ public class ShowTripsActivity extends AppCompatActivity implements IOnTripClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_triplistview);
         recyclerView = findViewById(R.id.tripListRecyclerView);
-        possibleTrips = new String[MainActivity.tripManager.getTripList().size()];
+        possibleTrips = new String[PlanTripActivity.tripList.size()];
 
-        for (int i = 0; i < MainActivity.tripManager.getTripList().size(); i++) {
-            possibleTrips[i] = MainActivity.tripManager.getTripList().get(i).toString();
+        for (int i = 0; i < PlanTripActivity.tripList.size(); i++) {
+            possibleTrips[i] = PlanTripActivity.tripList.get(i).toString();
         }
 
         recyclerView.setHasFixedSize(true);
