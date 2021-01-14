@@ -36,7 +36,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void onPlanTrip(View view) {
-        ASAPExampleApplication.initializeASAPExampleApplication(this);
+        ASAPTickShareApplication.initializeASAPExampleApplication(this);
 
         Intent intent = new Intent(this, PlanTripActivity.class);
         try {
@@ -47,7 +47,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void onOfferTrip(View view) {
-        ASAPExampleApplication.initializeASAPExampleApplication(this);
+        ASAPTickShareApplication.initializeASAPExampleApplication(this);
         Intent intent = new Intent(this, OfferTripActivity.class);
         try {
             startActivity(intent);

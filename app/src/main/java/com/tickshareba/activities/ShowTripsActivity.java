@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tickshareba.R;
+import com.tickshareba.models.TripModel;
 
 import java.util.Arrays;
 
@@ -55,6 +56,7 @@ public class ShowTripsActivity extends AppCompatActivity implements IOnTripClick
     public void onButtonBackClick(View view) {
         Intent intent = new Intent(this, PlanTripActivity.class);
         startActivity(intent);
+        // das ist vielleicht nicht so schön :/
         Arrays.fill(possibleTrips, null);
         MainActivity.tripManager.getTripList().clear();
         tripsAdapter.notifyItemRangeRemoved(0, possibleTrips.length);

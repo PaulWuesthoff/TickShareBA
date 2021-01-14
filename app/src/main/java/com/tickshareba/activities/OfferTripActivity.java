@@ -2,18 +2,15 @@ package com.tickshareba.activities;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.tickshareba.Constants;
@@ -26,15 +23,13 @@ import net.sharksystem.asap.ASAPStorage;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Set;
 
 import static net.sharksystem.asap.android.example.ASAPExampleApplication.ASAP_EXAMPLE_APPNAME;
 
-public class OfferTripActivity extends ASAPExampleRootActivity {
+public class OfferTripActivity extends ASAPTickShareRootActivity {
 
     private EditText startingLocation, destination, startingTime, seatsLeft;
 
@@ -49,9 +44,11 @@ public class OfferTripActivity extends ASAPExampleRootActivity {
         setUpTextFields();
         MainActivity.createTripPersistenceManager(this);
 
-        //MainActivity.tripPersistenceManager.deleteOldTrips();
+//        MainActivity.tripPersistenceManager.deleteOldTrips();
+
         cleanUp();
-        //super.startWifiP2P();
+
+        super.startWifiP2P();
         super.startBluetooth();
         super.startBluetoothDiscovery();
         super.startBluetoothDiscoverable();

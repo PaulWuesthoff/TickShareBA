@@ -9,11 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,11 +35,10 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 
 import static net.sharksystem.asap.android.example.ASAPExampleApplication.ASAP_EXAMPLE_APPNAME;
 
-public class PlanTripActivity extends ASAPExampleRootActivity {
+public class PlanTripActivity extends ASAPTickShareRootActivity {
 
     private EditText startingLocation, destination, startingTime;
     final Calendar calender = Calendar.getInstance();
@@ -63,7 +60,7 @@ public class PlanTripActivity extends ASAPExampleRootActivity {
         tripList = new ArrayList<>();
         cleanUp();
 
-        //super.startWifiP2P();
+        super.startWifiP2P();
         super.startBluetooth();
         super.startBluetoothDiscovery();
         super.startBluetoothDiscoverable();
@@ -90,15 +87,6 @@ public class PlanTripActivity extends ASAPExampleRootActivity {
         //TODO: Add startingtime check when searching for trips
         String startingTime = this.startingTime.getEditableText().toString().trim();
 
-//        MainActivity.tripManager.createTrip("1", "Berlin", "Hamburg", "Dec 29,2020 14:11", "3", "Token");
-
-//        tripList = MainActivity.tripPersistenceManager.getAllTrips();
-//        for(TripModel trip : this.tripList){
-//            if(trip.getStartingLocation().equals(startingLocation) && trip.getDestination().equals(destination)
-//                    && Integer.valueOf(trip.getSeatsLeft()) > 0){
-//                MainActivity.tripManager.getTripList().add(trip);
-//            }
-//        }
         Intent intent = new Intent(this, ShowTripsActivity.class);
         startActivity(intent);
     }
@@ -188,12 +176,8 @@ public class PlanTripActivity extends ASAPExampleRootActivity {
         String all = sb.toString();
         Log.d("Hello", "Revieced: "+all);
         Gson gson = new GsonBuilder().setLenient().create();
-        //all = all.substring(1, all.length() - 1);
-        System.out.println("##############" + all);
         Type listOfClass = new TypeToken<List<TripModel>>() {}.getType();
         tripList = gson.fromJson(all, listOfClass);
-        System.out.println("############" + receivedMessages.toString());
-//        System.out.println("############1" + list.toString());
     }
 
     ASAPStorage asapStorage;

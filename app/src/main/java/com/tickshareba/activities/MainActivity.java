@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.tickshareba.management.TripManagerImpl;
 import com.tickshareba.management.UserManagerImpl;
+import com.tickshareba.models.TripModel;
 import com.tickshareba.persistence.ITripPersistenceManager;
 import com.tickshareba.persistence.IUserPersistenceManager;
 import com.tickshareba.persistence.TripPersistenceManagerDBHelper;
@@ -18,7 +19,9 @@ import com.tickshareba.persistence.UserPersistenceManagerDBHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import lombok.Getter;
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     public static IUserPersistenceManager userPersistenceManagerDBHelper;
     public static ITripPersistenceManager tripPersistenceManager;
 
+    public static List<TripModel> tripModelList;
+
     protected static final Logger LOG = LogManager.getLogger(MainActivity.class);
 
     public static Intent showMainMenu;
@@ -47,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         userManager = new UserManagerImpl();
         tripManager = new TripManagerImpl();
+        tripModelList = new ArrayList<>();
 
         showMainMenu = new Intent(this, MainMenuActivity.class);
         startActivity(showMainMenu);

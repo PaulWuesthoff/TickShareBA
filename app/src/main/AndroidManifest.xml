@@ -22,8 +22,6 @@
         <activity android:name=".activities.PlanTripActivity"/>
         <activity android:name=".activities.ShowTripsActivity"/>
         <activity android:name=".activities.ShowSingleTripActivity"/>
-        <activity android:name=".activities.ASAPExampleMessagingActivity"/>
-        <activity android:name=".activities.ASAPExampleActivity"/>
         <service
             android:name="net.sharksystem.asap.android.service.ASAPService"
             android:enabled="true"

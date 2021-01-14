@@ -8,28 +8,28 @@ import net.sharksystem.asap.android.apps.ASAPApplication;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class ASAPExampleApplication extends ASAPApplication {
+public class ASAPTickShareApplication extends ASAPApplication {
     public static final String ASAP_EXAMPLE_APPNAME = "ASAP_EXAMPLE_APP";
     private CharSequence id;
-    static ASAPExampleApplication instance = null;
+    static ASAPTickShareApplication instance = null;
 
-    static ASAPExampleApplication initializeASAPExampleApplication(Activity initialActivity) {
-        if(ASAPExampleApplication.instance == null) {
+    static ASAPTickShareApplication initializeASAPExampleApplication(Activity initialActivity) {
+        if(ASAPTickShareApplication.instance == null) {
             Collection<CharSequence> formats = new ArrayList<>();
             formats.add(ASAP_EXAMPLE_APPNAME);
 
             // create
-            ASAPExampleApplication.instance = new ASAPExampleApplication(formats, initialActivity);
+            ASAPTickShareApplication.instance = new ASAPTickShareApplication(formats, initialActivity);
 
             // there could be some other steps. Setting up sub components. But there are non here.
             // launch
-            ASAPExampleApplication.instance.startASAPApplication();
+            ASAPTickShareApplication.instance.startASAPApplication();
         } // else - already initialized - nothing happens.
 
-        return ASAPExampleApplication.instance;
+        return ASAPTickShareApplication.instance;
     }
 
-    private ASAPExampleApplication(Collection<CharSequence> formats, Activity initialActivity) {
+    private ASAPTickShareApplication(Collection<CharSequence> formats, Activity initialActivity) {
         super(formats, initialActivity);
 
         this.id = ASAP.createUniqueID();
