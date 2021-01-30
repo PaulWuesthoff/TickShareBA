@@ -10,43 +10,40 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+
 import com.tickshareba.Constants;
 import com.tickshareba.R;
 import com.tickshareba.models.TripModel;
 
-import net.sharksystem.asap.ASAPEngineFS;
+import net.sharksystem.asap.ASAP;
 import net.sharksystem.asap.ASAPException;
-import net.sharksystem.asap.ASAPMessages;
-import net.sharksystem.asap.ASAPStorage;
-import net.sharksystem.asap.apps.ASAPMessageReceivedListener;
+import net.sharksystem.asap.ASAPMessageReceivedListener;
+import net.sharksystem.asap.android.apps.ASAPActivity;
+import net.sharksystem.asap.android.apps.ASAPAndroidPeer;
+
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import static net.sharksystem.asap.android.example.ASAPExampleApplication.ASAP_EXAMPLE_APPNAME;
-
-public class PlanTripActivity extends ASAPTickShareRootActivity {
+public class PlanTripActivity extends ASAPActivity {
 
     private EditText startingLocation, destination, startingTime;
     final Calendar calender = Calendar.getInstance();
 
-    public static List<TripModel> tripList;
+    private ASAPAndroidPeer peer;
 
-    private ASAPMessageReceivedListener receivedListener;
-    private List<String> receivedMessages = new ArrayList<>();
+    List<String> list;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,27 +54,20 @@ public class PlanTripActivity extends ASAPTickShareRootActivity {
         StrictMode.setThreadPolicy(policy);
         MainActivity.createTripPersistenceManager(this);
 
-        tripList = new ArrayList<>();
-        cleanUp();
+        list = new ArrayList<>();
+        peer = super.getASAPAndroidPeer();
+//        cleanUp();
 
         super.startWifiP2P();
         super.startBluetooth();
         super.startBluetoothDiscovery();
         super.startBluetoothDiscoverable();
 
-        this.receivedListener = new ASAPMessageReceivedListener() {
-            @Override
-            public void asapMessagesReceived(ASAPMessages asapMessages) {
-                Log.d(getLogStart(), "asapMessageReceived");
-                PlanTripActivity.this.doHandleReceivedMessages(asapMessages);
-            }
-        };
+        ASAPMessageReceivedListener listener = new TickshareASAPMessageReceivedListener();
+        peer.addASAPMessageReceivedListener("Tickshare", listener);
 
-        // set listener to get informed about newly arrived messages
-        Log.d(getLogStart(), " activating listener");
-        this.getASAPApplication().addASAPMessageReceivedListener(
-                ASAP_EXAMPLE_APPNAME, // listen to this app
-                this.receivedListener);
+
+
     }
 
     public void onButtonSearchClick(View view) {
@@ -148,69 +138,5 @@ public class PlanTripActivity extends ASAPTickShareRootActivity {
         startingTime = findViewById(R.id.editTextWhenDoYouWantToGo);
 
     }
-
-    // handle incoming messages
-    private void doHandleReceivedMessages(ASAPMessages asapMessages) {
-        Log.d(this.getLogStart(), "going to handle received messages with uri: "
-                + asapMessages.getURI());
-
-        // set up output
-        StringBuilder sb = new StringBuilder();
-        try {
-            Iterator<CharSequence> messagesAsCharSequence = asapMessages.getMessagesAsCharSequence();
-            //sb.append("new messages:\n");
-            while (messagesAsCharSequence.hasNext()) {
-                String receivedMessage = messagesAsCharSequence.next().toString();
-                this.receivedMessages.add(receivedMessage);
-                sb.append(receivedMessage);
-            }
-//            //sb.append("received messages: \n");
-//            for (String msg : this.receivedMessages) {
-//                sb.append(msg);
-//            }
-        } catch (IOException e) {
-            Log.e(this.getLogStart(), "problems when handling received messages: "
-                    + e.getLocalizedMessage());
-            sb.append(e.getLocalizedMessage());
-        }
-        String all = sb.toString();
-        Log.d("Hello", "Revieced: "+all);
-        Gson gson = new GsonBuilder().setLenient().create();
-        Type listOfClass = new TypeToken<List<TripModel>>() {}.getType();
-        tripList = gson.fromJson(all, listOfClass);
-    }
-
-    ASAPStorage asapStorage;
-
-    private void cleanUp() {
-        try {
-            this.setupCleanASAPStorage();
-        } catch (IOException | ASAPException e) {
-            Log.d(this.getLogStart(), "exception: " + e.getLocalizedMessage());
-        } catch (RuntimeException e) {
-            Log.d(this.getLogStart(), "runtime exception: " + e.getLocalizedMessage());
-        }
-    }
-
-    private void setupCleanASAPStorage() throws IOException, ASAPException {
-        String absoluteFolderName = this.getASAPApplication().getApplicationRootFolder(ASAP_EXAMPLE_APPNAME);
-        Log.d(this.getLogStart(), "going to clean folder:  " + absoluteFolderName);
-
-        ASAPEngineFS.removeFolder(absoluteFolderName);
-
-        Log.d(this.getLogStart(), "create asap storage with:  "
-                + this.getASAPApplication().getOwnerID()
-                + " | "
-                + this.getASAPApplication().getApplicationRootFolder(ASAP_EXAMPLE_APPNAME)
-                + " | "
-                + ASAP_EXAMPLE_APPNAME
-        );
-
-        this.asapStorage = ASAPEngineFS.getASAPStorage(
-                this.getASAPApplication().getOwnerID().toString(),
-                this.getASAPApplication().getApplicationRootFolder(ASAP_EXAMPLE_APPNAME),
-                ASAP_EXAMPLE_APPNAME);
-    }
-
 
 }

@@ -8,10 +8,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.tickshareba.R;
 import com.tickshareba.models.TripModel;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ShowTripsActivity extends AppCompatActivity implements IOnTripClick {
     private RecyclerView recyclerView;
@@ -20,16 +26,28 @@ public class ShowTripsActivity extends AppCompatActivity implements IOnTripClick
     public static int position = 0;
     private String[] possibleTrips;
 
+    private List<TripModel> tripModels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_triplistview);
-        recyclerView = findViewById(R.id.tripListRecyclerView);
-        possibleTrips = new String[PlanTripActivity.tripList.size()];
 
-        for (int i = 0; i < PlanTripActivity.tripList.size(); i++) {
-            possibleTrips[i] = PlanTripActivity.tripList.get(i).toString();
+        tripModels = new ArrayList<>();
+
+        Gson gson = new GsonBuilder().setLenient().create();
+        Type listOfClass = new TypeToken<List<TripModel>>() {
+        }.getType();
+
+        for (String model : MainActivity.tripModelList) {
+            tripModels = gson.fromJson(model, listOfClass);
+        }
+
+        recyclerView = findViewById(R.id.tripListRecyclerView);
+        possibleTrips = new String[tripModels.size()];
+
+        for (int i = 0; i < tripModels.size(); i++) {
+            possibleTrips[i] = tripModels.get(i).toString();
         }
 
         recyclerView.setHasFixedSize(true);

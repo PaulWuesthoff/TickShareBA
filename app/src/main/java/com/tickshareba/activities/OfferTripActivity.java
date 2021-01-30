@@ -2,6 +2,7 @@ package com.tickshareba.activities;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,19 +18,20 @@ import com.tickshareba.Constants;
 import com.tickshareba.R;
 import com.tickshareba.models.UserModel;
 
-import net.sharksystem.asap.ASAPEngineFS;
 import net.sharksystem.asap.ASAPException;
-import net.sharksystem.asap.ASAPStorage;
+import net.sharksystem.asap.android.apps.ASAPActivity;
+import net.sharksystem.asap.android.apps.ASAPAndroidPeer;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
 
-import static net.sharksystem.asap.android.example.ASAPExampleApplication.ASAP_EXAMPLE_APPNAME;
 
-public class OfferTripActivity extends ASAPTickShareRootActivity {
+public class OfferTripActivity extends ASAPActivity {
 
     private EditText startingLocation, destination, startingTime, seatsLeft;
 
@@ -37,16 +39,17 @@ public class OfferTripActivity extends ASAPTickShareRootActivity {
 
     final Calendar calendar = Calendar.getInstance();
 
+    private ASAPAndroidPeer peer;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offertrip);
         setUpTextFields();
         MainActivity.createTripPersistenceManager(this);
-
-//        MainActivity.tripPersistenceManager.deleteOldTrips();
-
-        cleanUp();
+        peer = this.getASAPAndroidPeer();
+        MainActivity.tripPersistenceManager.deleteOldTrips();
 
         super.startWifiP2P();
         super.startBluetooth();
@@ -70,7 +73,8 @@ public class OfferTripActivity extends ASAPTickShareRootActivity {
                 showErrorAlert();
                 finish();
             }
-            if (MainActivity.tripManager.createTrip(null, locationString, destinationString, startingTimeString, seatsLeftString, userModel.getToken())) {
+            if (MainActivity.tripManager.createTrip(null, locationString, destinationString,
+                    startingTimeString, seatsLeftString, userModel.getToken())) {
                 MainActivity.showSuccessAlert(this, Constants.TRIP_SUCCESS.getValue());
                 System.out.println(MainActivity.tripPersistenceManager.persistTrip(MainActivity.tripManager.getTripList().get(0)) + "##########");
                 MainActivity.tripManager.getTripList().clear();
@@ -80,15 +84,10 @@ public class OfferTripActivity extends ASAPTickShareRootActivity {
                 String tripsToString = gson.toJson(MainActivity.tripPersistenceManager.getAllTrips());
                 byte[] byteContent = tripsToString.getBytes();
 
-                Log.d(this.getLogStart(), "Sending the follwoing: " + tripsToString.toString());
+                Log.d(this.getLogStart(), "Sending the follwoing: " + tripsToString);
                 Log.d(this.getLogStart(), "going to send messageBytes: " + byteContent.toString());
-
                 try {
-                    this.sendASAPMessage(
-                            ASAP_EXAMPLE_APPNAME,
-                            Constants.URI.getValue(),
-                            byteContent,
-                            true);
+                   peer.sendASAPMessage("Tickshare", Constants.URI.getValue(), byteContent);
                 } catch (ASAPException e) {
                     Log.e(this.getLogStart(), "when sending asap message: " + e.getLocalizedMessage());
                 }
@@ -100,7 +99,6 @@ public class OfferTripActivity extends ASAPTickShareRootActivity {
                 MainActivity.showSuccessAlert(this, Constants.TRIP_SUCCESS.getValue());
                 System.out.println(MainActivity.tripPersistenceManager.persistTrip(MainActivity.tripManager.getTripList().get(0)) + "##########");
 
-               // MainActivity.tripPersistenceManager.deleteOldTrips();
                 Gson gson = new Gson();
                 String tripsToString = gson.toJson(MainActivity.tripPersistenceManager.getAllTrips());
                 byte[] byteContent = tripsToString.getBytes();
@@ -109,11 +107,7 @@ public class OfferTripActivity extends ASAPTickShareRootActivity {
                 Log.d(this.getLogStart(), "going to send messageBytes: " + byteContent.toString());
 
                 try {
-                    this.sendASAPMessage(
-                            ASAP_EXAMPLE_APPNAME,
-                            Constants.URI.getValue(),
-                            byteContent,
-                            true);
+                     peer.sendASAPMessage("Tickshare", Constants.URI.getValue(), byteContent);
                 } catch (ASAPException e) {
                     Log.e(this.getLogStart(), "when sending asap message: " + e.getLocalizedMessage());
                 }
@@ -163,6 +157,14 @@ public class OfferTripActivity extends ASAPTickShareRootActivity {
         }
     };
 
+    public void onBackClick(View view){
+        super.stopBluetooth();
+        super.stopWifiP2P();
+        Intent intent = new Intent(this, MainMenuActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 
     private void updateLabelDate() {
         String myFormat = Constants.DATE_FORMAT.getValue();
@@ -191,38 +193,6 @@ public class OfferTripActivity extends ASAPTickShareRootActivity {
 
     private boolean checkUserModel(UserModel userModel) {
         return userModel != null && !userModel.getToken().equals("") && !userModel.getToken().equals(null);
-    }
-
-    ASAPStorage asapStorage;
-
-    private void cleanUp() {
-        try {
-            this.setupCleanASAPStorage();
-        } catch (IOException | ASAPException e) {
-            Log.d(this.getLogStart(), "exception: " + e.getLocalizedMessage());
-        } catch (RuntimeException e) {
-            Log.d(this.getLogStart(), "runtime exception: " + e.getLocalizedMessage());
-        }
-    }
-
-    private void setupCleanASAPStorage() throws IOException, ASAPException {
-        String absoluteFolderName = this.getASAPApplication().getApplicationRootFolder(ASAP_EXAMPLE_APPNAME);
-        Log.d(this.getLogStart(), "going to clean folder:  " + absoluteFolderName);
-
-        ASAPEngineFS.removeFolder(absoluteFolderName);
-
-        Log.d(this.getLogStart(), "create asap storage with:  "
-                + this.getASAPApplication().getOwnerID()
-                + " | "
-                + this.getASAPApplication().getApplicationRootFolder(ASAP_EXAMPLE_APPNAME)
-                + " | "
-                + ASAP_EXAMPLE_APPNAME
-        );
-
-        this.asapStorage = ASAPEngineFS.getASAPStorage(
-                this.getASAPApplication().getOwnerID().toString(),
-                this.getASAPApplication().getApplicationRootFolder(ASAP_EXAMPLE_APPNAME),
-                ASAP_EXAMPLE_APPNAME);
     }
 
 }

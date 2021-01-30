@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     public static IUserPersistenceManager userPersistenceManagerDBHelper;
     public static ITripPersistenceManager tripPersistenceManager;
 
-    public static List<TripModel> tripModelList;
+    public static List<String> tripModelList;
 
     protected static final Logger LOG = LogManager.getLogger(MainActivity.class);
 

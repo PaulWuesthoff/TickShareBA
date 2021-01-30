@@ -3,16 +3,48 @@ package com.tickshareba.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.tickshareba.R;
+import com.tickshareba.authentication.TokenGenerator;
+
+import net.sharksystem.asap.ASAP;
+import net.sharksystem.asap.ASAPException;
+import net.sharksystem.asap.android.apps.ASAPAndroidPeer;
+import net.sharksystem.asap.android.example.ExampleAppDefinitions;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class MainMenuActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        try {
+            // step 1: initialize ASAP peer (application side)
+            if(!ASAPAndroidPeer.peerInitialized()) {
+                Collection<CharSequence> formats = new ArrayList<>();
+                formats.add("Tickshare");
+                // generate a name for this peer
+                String peerName = ASAP.createUniqueID();
+                ASAPAndroidPeer.initializePeer(peerName, formats, this);
+            }
+
+            // step 2: launch whole system (and ASAP peer service side)
+            if(!ASAPAndroidPeer.peerStarted()) {
+                ASAPAndroidPeer.startPeer();
+            }
+        } catch (IOException | ASAPException e) {
+            e.printStackTrace();
+            Toast.makeText(this,
+                    "fatal: " + e.getLocalizedMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
     }
@@ -36,8 +68,6 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void onPlanTrip(View view) {
-        ASAPTickShareApplication.initializeASAPExampleApplication(this);
-
         Intent intent = new Intent(this, PlanTripActivity.class);
         try {
             startActivity(intent);
@@ -47,7 +77,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void onOfferTrip(View view) {
-        ASAPTickShareApplication.initializeASAPExampleApplication(this);
+
         Intent intent = new Intent(this, OfferTripActivity.class);
         try {
             startActivity(intent);
