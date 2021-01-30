@@ -26,16 +26,19 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         try {
-            // step 1: initialize ASAP peer (application side)
             if(!ASAPAndroidPeer.peerInitialized()) {
                 Collection<CharSequence> formats = new ArrayList<>();
                 formats.add("Tickshare");
-                // generate a name for this peer
-                String peerName = ASAP.createUniqueID();
+                String peerName;
+                if(MainActivity.getUserState() == UserState.LOGGED_IN){
+                     peerName = ASAP.createUniqueID();
+                }else{
+                    peerName = MainActivity.userManager.getUserList().get(0).getToken();
+                }
+
                 ASAPAndroidPeer.initializePeer(peerName, formats, this);
             }
 
-            // step 2: launch whole system (and ASAP peer service side)
             if(!ASAPAndroidPeer.peerStarted()) {
                 ASAPAndroidPeer.startPeer();
             }

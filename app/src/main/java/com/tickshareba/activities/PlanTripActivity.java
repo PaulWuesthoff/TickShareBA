@@ -56,7 +56,6 @@ public class PlanTripActivity extends ASAPActivity {
 
         list = new ArrayList<>();
         peer = super.getASAPAndroidPeer();
-//        cleanUp();
 
         super.startWifiP2P();
         super.startBluetooth();
