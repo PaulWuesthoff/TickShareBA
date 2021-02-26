@@ -23,6 +23,6 @@ public interface ITripManager{
      * @param seatsLeft
      * @return
      */
-    public boolean createTripWithouUserToken(String startingLocation, String destination, String startingTime, String seatsLeft);
+    public boolean createTripWithoutUserToken(String startingLocation, String destination, String startingTime, String seatsLeft);
 
 }

@@ -31,7 +31,7 @@ public class TripManagerImpl implements ITripManager {
     }
 
     @Override
-    public boolean createTripWithouUserToken(String startingLocation, String destination, String startingTime, String seatsLeft) {
+    public boolean createTripWithoutUserToken(String startingLocation, String destination, String startingTime, String seatsLeft) {
         if(checkTripValuesWithoutToken(startingLocation, destination, startingTime, seatsLeft)){
             return tripList.add(new TripModel(startingLocation, destination, startingTime, seatsLeft));
         }

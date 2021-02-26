@@ -10,6 +10,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Random;
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
@@ -29,6 +30,7 @@ public class PasswordUtils {
         }
         return new String(returnValue);
     }
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static byte[] hash(char[] password, byte[] salt) {
         PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
@@ -42,12 +44,27 @@ public class PasswordUtils {
             spec.clearPassword();
         }
     }
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static String generateSecurePassword(String password, String salt) {
         String returnValue = null;
         byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            returnValue = Base64.getEncoder().encodeToString(securePassword);
+        }
+
+        return returnValue;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static String generateSecurePassword(String password, String salt, boolean isTest) {
+        String returnValue = null;
+        byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            returnValue = Base64.getEncoder().encodeToString(securePassword);
+        } else if (isTest) {
             returnValue = Base64.getEncoder().encodeToString(securePassword);
         }
 

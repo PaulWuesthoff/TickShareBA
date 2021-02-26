@@ -35,6 +35,27 @@ public class UserModel {
 
     }
 
+    /**
+     * Konstruktor für die Test methoden, da die PasswordUtils von der Andorid Version abhängig sind und wir java testen und nicht Android
+     * @param name
+     * @param lastName
+     * @param region
+     * @param emailAddress
+     * @param password
+     * @param isTest
+     */
+    public UserModel(String name, String lastName, String region, String emailAddress, String password, boolean isTest) {
+        this.name = name;
+        this.lastName = lastName;
+        this.region = region;
+        this.emailAddress = emailAddress;
+        this.salt = PasswordUtils.getSalt(30);
+        this.password = hashPassword(password, isTest);
+        this.token = generateToken();
+
+
+    }
+
     private String generateToken() {
         TokenGenerator tokenGenerator = new TokenGenerator(20);
         return tokenGenerator.nextString();
@@ -42,6 +63,11 @@ public class UserModel {
 
     private String hashPassword(String password) {
         String passwordToHash = PasswordUtils.generateSecurePassword(password, salt);
+        return passwordToHash;
+    }
+
+    private String hashPassword(String password, boolean isTest) {
+        String passwordToHash = PasswordUtils.generateSecurePassword(password, salt, isTest);
         return passwordToHash;
     }
 

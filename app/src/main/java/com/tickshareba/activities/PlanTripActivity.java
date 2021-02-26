@@ -42,7 +42,7 @@ public class PlanTripActivity extends ASAPActivity {
 
     private ASAPAndroidPeer peer;
 
-    List<String> list;
+    private List<String> list;
 
 
     @Override
@@ -64,8 +64,6 @@ public class PlanTripActivity extends ASAPActivity {
 
         ASAPMessageReceivedListener listener = new TickshareASAPMessageReceivedListener();
         peer.addASAPMessageReceivedListener("Tickshare", listener);
-
-
 
     }
 

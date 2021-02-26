@@ -22,11 +22,8 @@ import net.sharksystem.asap.ASAPException;
 import net.sharksystem.asap.android.apps.ASAPActivity;
 import net.sharksystem.asap.android.apps.ASAPAndroidPeer;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
 
@@ -95,7 +92,7 @@ public class OfferTripActivity extends ASAPActivity {
                 showErrorAlert();
             }
         } else if (MainActivity.getUserState().equals(UserState.LOGGED_OUT)) {
-            if (MainActivity.tripManager.createTripWithouUserToken(locationString, destinationString, startingTimeString, seatsLeftString)) {
+            if (MainActivity.tripManager.createTripWithoutUserToken(locationString, destinationString, startingTimeString, seatsLeftString)) {
                 MainActivity.showSuccessAlert(this, Constants.TRIP_SUCCESS.getValue());
                 System.out.println(MainActivity.tripPersistenceManager.persistTrip(MainActivity.tripManager.getTripList().get(0)) + "##########");
 
@@ -103,7 +100,7 @@ public class OfferTripActivity extends ASAPActivity {
                 String tripsToString = gson.toJson(MainActivity.tripPersistenceManager.getAllTrips());
                 byte[] byteContent = tripsToString.getBytes();
 
-                Log.d(this.getLogStart(), "Sending the follwoing: " + tripsToString.toString());
+                Log.d(this.getLogStart(), "Sending the follwo ing: " + tripsToString.toString());
                 Log.d(this.getLogStart(), "going to send messageBytes: " + byteContent.toString());
 
                 try {

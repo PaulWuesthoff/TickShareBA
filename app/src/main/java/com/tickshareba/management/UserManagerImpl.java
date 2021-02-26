@@ -24,6 +24,7 @@ public class UserManagerImpl implements IUserManager {
 
     @Getter
     private List<UserModel> userList;
+    @Getter
     private Map<String, String> errorMap;
 
     public UserManagerImpl() {

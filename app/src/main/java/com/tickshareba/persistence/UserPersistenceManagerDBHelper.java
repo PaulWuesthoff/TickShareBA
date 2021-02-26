@@ -4,9 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.tickshareba.models.TripModel;
 import com.tickshareba.models.UserModel;
 
 import java.util.ArrayList;
@@ -39,6 +39,22 @@ public class UserPersistenceManagerDBHelper extends SQLiteOpenHelper implements 
         db.execSQL(CREATE_TABLE);
     }
 
+    /**
+     * Check if the database exist and can be read.
+     *
+     * @return true if it exists and can be read, false if it doesn't
+     */
+    private boolean checkDataBase() {
+        SQLiteDatabase checkDB = null;
+        try {
+            checkDB = SQLiteDatabase.openDatabase(DB_NAME, null,
+                    SQLiteDatabase.OPEN_READONLY);
+            checkDB.close();
+        } catch (SQLiteException e) {
+            // database doesn't exist yet.
+        }
+        return checkDB != null;
+    }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
@@ -104,6 +120,13 @@ public class UserPersistenceManagerDBHelper extends SQLiteOpenHelper implements 
     @Override
     public boolean deleteUser(UserModel userModel) {
         return false;
+    }
+
+
+    public void wipeDatabase(){
+        SQLiteDatabase database = this.getWritableDatabase();
+        String deleteStatement = "DELETE FROM "+ TABLE_NAME+";";
+        database.execSQL(deleteStatement);
     }
 
 }
