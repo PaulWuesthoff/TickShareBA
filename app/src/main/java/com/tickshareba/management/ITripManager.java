@@ -2,6 +2,8 @@ package com.tickshareba.management;
 
 import com.tickshareba.models.TripModel;
 
+import java.util.List;
+
 public interface ITripManager{
 //TODO: add javadoc descriptions later
     /**
@@ -24,5 +26,11 @@ public interface ITripManager{
      * @return
      */
     public boolean createTripWithoutUserToken(String startingLocation, String destination, String startingTime, String seatsLeft);
+
+    /**
+     *
+     * @return
+     */
+    public List<TripModel> getTripList();
 
 }

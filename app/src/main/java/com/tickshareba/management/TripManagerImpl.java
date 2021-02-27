@@ -23,19 +23,19 @@ public class TripManagerImpl implements ITripManager {
 
     @Override
     public boolean createTrip(String ID, String startingLocation, String destination, String startingTime, String seatsLeft, String userToken) {
-        if(checkTripValuesWithToken(ID, startingLocation, destination, startingTime, seatsLeft, userToken)){
+        if (checkTripValuesWithToken(ID, startingLocation, destination, startingTime, seatsLeft, userToken)) {
             return tripList.add(new TripModel(null, startingLocation, destination, startingTime, seatsLeft, userToken));
         }
-        LOG.error("Error while creating trip with values: ID: "+ID+", startinglocation: "+startingLocation+", destination: "+ destination  );
+        LOG.error("Error while creating trip with values: ID: " + ID + ", startinglocation: " + startingLocation + ", destination: " + destination);
         return false;
     }
 
     @Override
     public boolean createTripWithoutUserToken(String startingLocation, String destination, String startingTime, String seatsLeft) {
-        if(checkTripValuesWithoutToken(startingLocation, destination, startingTime, seatsLeft)){
+        if (checkTripValuesWithoutToken(startingLocation, destination, startingTime, seatsLeft)) {
             return tripList.add(new TripModel(startingLocation, destination, startingTime, seatsLeft));
         }
-        LOG.error("Error while creating trip with values: startinglocation: "+startingLocation+", destination: "+ destination  );
+        LOG.error("Error while creating trip with values: startinglocation: " + startingLocation + ", destination: " + destination);
         return false;
     }
 
@@ -46,11 +46,12 @@ public class TripManagerImpl implements ITripManager {
         if (startingTime == null || startingTime.isEmpty()) {
             LOG.error("Time is empty or null");
             returnVal = false;
-        }
-        try {
-            date = simpleDateFormat.parse(startingTime);
-        } catch (ParseException e) {
-            LOG.error("Error parsing time", e);
+        } else {
+            try {
+                date = simpleDateFormat.parse(startingTime);
+            } catch (ParseException e) {
+                LOG.error("Error parsing time", e);
+            }
         }
         if (startingLocation == null || startingLocation.isEmpty()) {
             LOG.error("starting Location is empty or null");
@@ -60,7 +61,7 @@ public class TripManagerImpl implements ITripManager {
             LOG.error("starting Location is empty or null");
             returnVal = false;
         }
-        if (date == null || startingTime.isEmpty()) {
+        if (date == null || startingTime.isEmpty() || date.before(getCurrentDate())) {
             LOG.error("Date is null or in the past");
             returnVal = false;
         }
@@ -82,11 +83,12 @@ public class TripManagerImpl implements ITripManager {
         if (startingTime == null || startingTime.isEmpty()) {
             LOG.error("Time is empty or null");
             returnVal = false;
-        }
-        try {
-            date = simpleDateFormat.parse(startingTime);
-        } catch (ParseException e) {
-            LOG.error("Error parsing time", e);
+        } else {
+            try {
+                date = simpleDateFormat.parse(startingTime);
+            } catch (ParseException e) {
+                LOG.error("Error parsing time", e);
+            }
         }
         if (startingLocation == null || startingLocation.isEmpty()) {
             LOG.error("starting Location is empty or null");
@@ -96,7 +98,7 @@ public class TripManagerImpl implements ITripManager {
             LOG.error("starting Location is empty or null");
             returnVal = false;
         }
-        if (date == null || startingTime.isEmpty()) {
+        if (date == null || startingTime.isEmpty() || date.before(getCurrentDate())) {
             LOG.error("Date is null or in the past");
             returnVal = false;
         }
@@ -108,4 +110,9 @@ public class TripManagerImpl implements ITripManager {
 
     }
 
+    private Date getCurrentDate() {
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        return date;
+    }
 }
