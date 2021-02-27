@@ -30,7 +30,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 Collection<CharSequence> formats = new ArrayList<>();
                 formats.add("Tickshare");
                 String peerName;
-                if(MainActivity.getUserState() == UserState.LOGGED_IN){
+                if(MainActivity.getUserState() == UserState.LOGGED_OUT){
                      peerName = ASAP.createUniqueID();
                 }else{
                     peerName = MainActivity.userManager.getUserList().get(0).getToken();

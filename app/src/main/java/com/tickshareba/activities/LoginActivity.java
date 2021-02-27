@@ -39,23 +39,43 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLogin(View view) {
         try {
-            if (authenticateUser(getUserData(), textFieldPassword.getText().toString())) {
-                MainActivity.userManager.getUserList().add(getUserData());
-                System.out.println(getUserData().toString());
-                MainActivity.showSuccessAlert(this, Constants.LOGIN_SUCCESS.getValue());
-                MainActivity.setUserState(UserState.LOGGED_IN);
-                finish();
-            }else{
-                showErrorAlert("Wrong Email or Password! Please try again. ");
+            if (getUserData() != null) {
+                if (authenticateUser(getUserData(), textFieldPassword.getText().toString())) {
+                    MainActivity.userManager.getUserList().add(getUserData());
+                    System.out.println(getUserData().toString());
+                    MainActivity.showSuccessAlert(this, Constants.LOGIN_SUCCESS.getValue());
+                    MainActivity.setUserState(UserState.LOGGED_IN);
+                    finish();
+                } else {
+                    showErrorAlert("Wrong Email or Password! Please try again. ");
+                }
+            } else {
+                if (MainActivity.userManager.getUserList() != null) {
+                    if (authenticateUser(MainActivity.userManager.getUserFromEmail(textFieldEmail.getText().toString()), textFieldPassword.getText().toString())) {
+                        MainActivity.userManager.getUserList().add(getUserData());
+                        System.out.println(getUserData().toString());
+                        MainActivity.showSuccessAlert(this, Constants.LOGIN_SUCCESS.getValue());
+                        MainActivity.setUserState(UserState.LOGGED_IN);
+                        finish();
+                    }
+                }
             }
-        }catch (Exception e){
+        } catch (
+                Exception e) {
             LOG.error("Something went wrong while logging in ! ", e);
             showErrorAlert("Wrong Email or Password! Please try again. ");
         }
+
     }
 
     private UserModel getUserData() {
-        return MainActivity.userPersistenceManagerDBHelper.getUser(textFieldEmail.getText().toString().trim());
+        UserModel userModel = null;
+        try {
+            userModel = MainActivity.userPersistenceManagerDBHelper.getUser(textFieldEmail.getText().toString().trim());
+        } catch (Exception e) {
+            LOG.error("Something went wrong querring data", e);
+        }
+        return userModel;
 
     }
 
