@@ -24,8 +24,6 @@ import static org.junit.Assert.assertTrue;
 
 public class RegisterActivityTest {
 
-    private final String TOAST_MESSAGE = "Your account has been succsessfully registerd";
-
     @Rule
     public ActivityTestRule<MainActivity> mainActivityActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 

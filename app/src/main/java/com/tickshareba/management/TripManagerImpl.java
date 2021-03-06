@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class TripManagerImpl implements ITripManager {
             LOG.error("starting Location is empty or null");
             returnVal = false;
         }
-        if (date == null || startingTime.isEmpty() || date.before(getCurrentDate())) {
+        if (date == null || startingTime.isEmpty() || date.before(getYesterdaysDate())) {
             LOG.error("Date is null or in the past");
             returnVal = false;
         }
@@ -98,7 +99,7 @@ public class TripManagerImpl implements ITripManager {
             LOG.error("starting Location is empty or null");
             returnVal = false;
         }
-        if (date == null || startingTime.isEmpty() || date.before(getCurrentDate())) {
+        if (date == null || startingTime.isEmpty() || date.before(getYesterdaysDate())) {
             LOG.error("Date is null or in the past");
             returnVal = false;
         }
@@ -110,9 +111,9 @@ public class TripManagerImpl implements ITripManager {
 
     }
 
-    private Date getCurrentDate() {
-        long millis = System.currentTimeMillis();
-        Date date = new Date(millis);
-        return date;
+    private Date getYesterdaysDate() {
+       final Calendar cal = Calendar.getInstance();
+       cal.add(Calendar.DATE, -1);
+       return cal.getTime();
     }
 }

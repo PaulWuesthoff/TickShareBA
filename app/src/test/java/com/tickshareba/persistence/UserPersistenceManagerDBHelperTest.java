@@ -38,7 +38,8 @@ public class UserPersistenceManagerDBHelperTest {
 
     @Test
     public void getUser() {
-        assertThat(userModel, equalTo(persistenceManager.getUser(userModel.getEmailAddress())));
+        persistenceManager.persistUser(userModel);
+        assertThat(userModel.getEmailAddress(), equalTo(persistenceManager.getUser(userModel.getEmailAddress()).getEmailAddress()));
     }
 
     @Test
