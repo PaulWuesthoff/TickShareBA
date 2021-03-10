@@ -108,7 +108,6 @@ public class OfferTripActivity extends ASAPActivity {
                 } catch (ASAPException e) {
                     Log.e(this.getLogStart(), "when sending asap message: " + e.getLocalizedMessage());
                 }
-                MainActivity.tripManager.getTripList().clear();
             } else {
                 showErrorAlert();
             }

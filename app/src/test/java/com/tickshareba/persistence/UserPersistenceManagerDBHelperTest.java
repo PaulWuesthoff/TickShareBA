@@ -41,8 +41,4 @@ public class UserPersistenceManagerDBHelperTest {
         persistenceManager.persistUser(userModel);
         assertThat(userModel.getEmailAddress(), equalTo(persistenceManager.getUser(userModel.getEmailAddress()).getEmailAddress()));
     }
-
-    @Test
-    public void deleteUser() {
-    }
 }

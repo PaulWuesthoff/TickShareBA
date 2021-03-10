@@ -18,7 +18,11 @@ public enum TestConstants {
     TOKEN("TestToken"),
     STARTINGLOCATION("TestLocation"),
     DESTINATION("TestDestination"),
-    SEATS_LEFT("3")
+    SEATS_LEFT("3"),
+    APP_NAME("TickshareBA"),
+    ALICE("Alice"),
+    BOB("Bob"),
+    URI("asap://exampleURI"),
 
     ;
 
