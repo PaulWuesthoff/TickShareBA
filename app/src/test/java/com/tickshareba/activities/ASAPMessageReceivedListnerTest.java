@@ -6,9 +6,7 @@ import net.sharksystem.asap.ASAPMessageReceivedListener;
 import net.sharksystem.asap.internals.ASAPMessages;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class ASAPMessageReceivedListnerTest implements ASAPMessageReceivedListener {
 
@@ -20,7 +18,7 @@ public class ASAPMessageReceivedListnerTest implements ASAPMessageReceivedListen
         Iterator<CharSequence> messageIterator = asapMessages.getMessagesAsCharSequence();
 
         StringBuilder sb = new StringBuilder();
-        if (uri.equals(Constants.URI.getValue())) {
+        if (uri.equals(Constants.TRIP_URI.getValue())) {
             while (messageIterator.hasNext()) {
                 String receivedMessage = messageIterator.next().toString();
                 ReceiveTripTest.tripModelList.add(receivedMessage);

@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.tickshareba.R;
 import com.tickshareba.models.TripModel;
 
+import net.sharksystem.asap.ASAPException;
+
 public class ShowSingleTripActivity extends AppCompatActivity {
 
     TripModel trip;
@@ -34,11 +36,12 @@ public class ShowSingleTripActivity extends AppCompatActivity {
     }
 
     public void onButtonAcceptClick(View view) {
-        int seatsLeft = Integer.parseInt(trip.getSeatsLeft());
-        seatsLeft--;
-        trip.setSeatsLeft(String.valueOf(seatsLeft));
-
-        seatsLeft = 0;
+        try {
+            PlanTripActivity.sendAcknowlagement(trip.getId(), trip.getUserToken() == null ? "unkown user" : trip.getUserToken());
+        } catch (ASAPException e) {
+            e.printStackTrace();
+        }
+        finish();
     }
 
 }

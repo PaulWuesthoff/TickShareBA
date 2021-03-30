@@ -40,7 +40,7 @@ public class PlanTripActivity extends ASAPActivity {
     private EditText startingLocation, destination, startingTime;
     final Calendar calender = Calendar.getInstance();
 
-    private ASAPAndroidPeer peer;
+    private static ASAPAndroidPeer peer;
 
     private List<String> list;
 
@@ -122,6 +122,12 @@ public class PlanTripActivity extends ASAPActivity {
             updateLabelDate();
         }
     };
+
+    public static void sendAcknowlagement(String ID, String token) throws ASAPException {
+        String message = "Your trip with the ID: "+ ID +" has been accepted by an User with the Token: "+token+" .";
+        byte [] byteMessage = message.getBytes();
+        peer.sendASAPMessage("Tickshare", Constants.ACKNWOLAGE_URI.getValue(), byteMessage);
+    }
 
     private void updateLabelDate() {
         String myFormat = Constants.DATE_FORMAT.getValue();

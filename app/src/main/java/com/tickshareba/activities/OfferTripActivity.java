@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -19,6 +20,7 @@ import com.tickshareba.R;
 import com.tickshareba.models.UserModel;
 
 import net.sharksystem.asap.ASAPException;
+import net.sharksystem.asap.ASAPMessageReceivedListener;
 import net.sharksystem.asap.android.apps.ASAPActivity;
 import net.sharksystem.asap.android.apps.ASAPAndroidPeer;
 
@@ -52,6 +54,12 @@ public class OfferTripActivity extends ASAPActivity {
         super.startBluetooth();
         super.startBluetoothDiscovery();
         super.startBluetoothDiscoverable();
+
+        ASAPMessageReceivedListener listener = new TickshareASAPMessageReceivedListener();
+        peer.addASAPMessageReceivedListener("Tickshare", listener);
+
+
+
     }
 
     public void onOfferNow(View view) {
@@ -84,7 +92,7 @@ public class OfferTripActivity extends ASAPActivity {
                 Log.d(this.getLogStart(), "Sending the follwoing: " + tripsToString);
                 Log.d(this.getLogStart(), "going to send messageBytes: " + byteContent.toString());
                 try {
-                   peer.sendASAPMessage("Tickshare", Constants.URI.getValue(), byteContent);
+                   peer.sendASAPMessage("Tickshare", Constants.TRIP_URI.getValue(), byteContent);
                 } catch (ASAPException e) {
                     Log.e(this.getLogStart(), "when sending asap message: " + e.getLocalizedMessage());
                 }
@@ -104,7 +112,7 @@ public class OfferTripActivity extends ASAPActivity {
                 Log.d(this.getLogStart(), "going to send messageBytes: " + byteContent.toString());
 
                 try {
-                     peer.sendASAPMessage("Tickshare", Constants.URI.getValue(), byteContent);
+                     peer.sendASAPMessage("Tickshare", Constants.TRIP_URI.getValue(), byteContent);
                 } catch (ASAPException e) {
                     Log.e(this.getLogStart(), "when sending asap message: " + e.getLocalizedMessage());
                 }

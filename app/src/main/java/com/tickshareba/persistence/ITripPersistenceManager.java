@@ -23,6 +23,20 @@ public interface ITripPersistenceManager {
 
     /**
      *
+     * @param ID
+     * @return
+     */
+    public TripModel getTripWithID(String ID);
+
+    /**
+     *
+     * @param ID
+     * @param tripModel
+     */
+    public void update(String ID, TripModel tripModel);
+
+    /**
+     *
      * @param tripModel
      * @return
      */

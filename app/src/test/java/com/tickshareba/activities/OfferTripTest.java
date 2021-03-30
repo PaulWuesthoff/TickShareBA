@@ -40,7 +40,7 @@ public class OfferTripTest {
         Gson gson = new Gson();
         String tripsToString = gson.toJson(tripManager.getTripList());
         byte[] byteContent = tripsToString.getBytes();
-        boolean send = false;
+        boolean send;
         try {
             alice.sendASAPMessage(TestConstants.APP_NAME.getValue(), TestConstants.URI.getValue(), byteContent);
             send = true;

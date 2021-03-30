@@ -12,7 +12,8 @@ public enum Constants {
     TRIP_SUCCESS("Your trip has been succsessfully created"),
     PASSWORD_LENGTH("8"),
     LOGIN_SUCCESS("Logged in"),
-    URI("asap://exampleURI"),
+    TRIP_URI("asap://tickshare_ticket_exchange"),
+    ACKNWOLAGE_URI("asap://ticksahre_acknowlagement"),
     ;
 
     @Getter

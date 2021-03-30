@@ -14,12 +14,14 @@ import java.util.Date;
 import java.util.List;
 
 import lombok.Getter;
+import lombok.Setter;
 
 public class TripManagerImpl implements ITripManager {
 
     private static final Logger LOG = LogManager.getLogger(TripManagerImpl.class);
 
     @Getter
+    @Setter
     private List<TripModel> tripList = new ArrayList<>();
 
     @Override

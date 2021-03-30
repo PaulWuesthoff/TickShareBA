@@ -49,6 +49,7 @@ public class ShowTripsActivity extends AppCompatActivity implements IOnTripClick
         for (int i = 0; i < tripModels.size(); i++) {
             possibleTrips[i] = tripModels.get(i).toString();
         }
+        MainActivity.tripManager.setTripList(tripModels);
 
         recyclerView.setHasFixedSize(true);
 
@@ -80,5 +81,7 @@ public class ShowTripsActivity extends AppCompatActivity implements IOnTripClick
         tripsAdapter.notifyItemRangeRemoved(0, possibleTrips.length);
         finish();
     }
+
+
 
 }

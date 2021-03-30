@@ -105,15 +105,55 @@ public class TripPersistenceManagerDBHelper extends SQLiteOpenHelper implements 
         return model;
     }
 
-
-    public List<TripModel> getAllTrips(){
+    @Override
+    public TripModel getTripWithID(String ID) {
         SQLiteDatabase database = this.getReadableDatabase();
-        String querry = "SELECT * FROM "+ TABLE_NAME+";";
+        String querry = "SELECT " + COL_STARTINGLOCATION + ", " + COL_DESTINATION + ", " + COL_STARTINGTIME + ", "
+                + COL_SEATSLEFT + ", " + COL_USERTOKEN + " FROM " + TABLE_NAME + " WHERE " + COL_ID + " = " + "'" + ID + "'" + ";";
+
+        Cursor data = database.rawQuery(querry, null);
+
+        List<String> tripInformation = new ArrayList<>();
+
+        while (data.moveToNext()) {
+            tripInformation.add(data.getString(0));
+            tripInformation.add(data.getString(1));
+            tripInformation.add(data.getString(2));
+            tripInformation.add(data.getString(3));
+            tripInformation.add(data.getString(4));
+        }
+
+        System.out.println(tripInformation.toString());
+
+
+        TripModel model = null;
+        if (tripInformation.size() <= 6) {
+            model = new TripModel(tripInformation.get(0), tripInformation.get(1), tripInformation.get(2), tripInformation.get(3));
+        } else {
+            model = new TripModel(getLastID(), tripInformation.get(1), tripInformation.get(2), tripInformation.get(3), tripInformation.get(4), tripInformation.get(5));
+        }
+
+
+        return model;
+    }
+
+    @Override
+    public void update(String ID, TripModel tripModel) {
+        SQLiteDatabase database = this.getReadableDatabase();
+        String querry = "UPDATE " + TABLE_NAME + " SET " + COL_STARTINGLOCATION + " = " + "'" + tripModel.getStartingLocation() + "'" + ", " + COL_DESTINATION + " = " + "'" + tripModel.getDestination() + "'" + ", " + COL_STARTINGTIME + " = " + "'" + tripModel.getStartingTime() + "'" + ", " +
+                COL_SEATSLEFT + " = " + "'" + tripModel.getSeatsLeft() + "'" + " WHERE " + COL_ID + " = " + ID + ";";
+        database.execSQL(querry);
+    }
+
+
+    public List<TripModel> getAllTrips() {
+        SQLiteDatabase database = this.getReadableDatabase();
+        String querry = "SELECT * FROM " + TABLE_NAME + ";";
         Cursor data = database.rawQuery(querry, null);
 
         List<TripModel> trips = new ArrayList<>();
 
-        while (data.moveToNext()){
+        while (data.moveToNext()) {
             String id = data.getString(0);
             String startingLocation = data.getString(1);
             String destination = data.getString(2);
@@ -129,13 +169,13 @@ public class TripPersistenceManagerDBHelper extends SQLiteOpenHelper implements 
     public boolean deleteTrip(TripModel tripModel) {
         SQLiteDatabase database = this.getWritableDatabase();
 
-        if (tripModel.getId() != null){
+        if (tripModel.getId() != null) {
             String deleteStatement = "DELETE FROM " + TABLE_NAME + " WHERE " + COL_ID + " = " + tripModel.getId() + ";";
             database.execSQL(deleteStatement);
             return true;
         }
 
-        LOG.error("There was a problem while deleting a TRIP, Tripmodelstate:  "+tripModel.toString());
+        LOG.error("There was a problem while deleting a TRIP, Tripmodelstate:  " + tripModel.toString());
 
         return false;
     }
@@ -146,7 +186,7 @@ public class TripPersistenceManagerDBHelper extends SQLiteOpenHelper implements 
 
         //java date nehmen und in der db nach suchen und dann löschen
         //String deleteStatement = "DELETE FROM " + TABLE_NAME + " WHERE " + COL_STARTINGTIME + " < " + "DATE();";
-        String deleteStatement = "DELETE FROM "+ TABLE_NAME+";";
+        String deleteStatement = "DELETE FROM " + TABLE_NAME + ";";
 
         database.execSQL(deleteStatement);
 

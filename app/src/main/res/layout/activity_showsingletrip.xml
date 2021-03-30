@@ -38,6 +38,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="48dp"
         android:background="@drawable/roundbutton"
+        android:onClick="onButtonAcceptClick"
         android:text="@string/buttonAcceptTrip"
         app:layout_constraintBottom_toBottomOf="@+id/backgroundShowSingleTrip"
         app:layout_constraintEnd_toEndOf="@+id/backgroundShowSingleTrip" />

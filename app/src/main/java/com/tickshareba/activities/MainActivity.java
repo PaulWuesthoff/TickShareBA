@@ -1,8 +1,11 @@
 package com.tickshareba.activities;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,6 +22,7 @@ import com.tickshareba.persistence.UserPersistenceManagerDBHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static Intent showMainMenu;
 
+
+
     @Getter
     @Setter
     private static UserState userState;
@@ -63,6 +69,20 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(context, succesAlert, Toast.LENGTH_LONG).show();
     }
 
+    public static void showAcknwloagementAlert(String succesAlert) throws Exception {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Toast.makeText(getStatic().getBaseContext(), succesAlert, Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
+
     public static void createPersistenceManager(Context context) {
         userPersistenceManagerDBHelper = new UserPersistenceManagerDBHelper(context);
     }
@@ -74,6 +94,12 @@ public class MainActivity extends AppCompatActivity {
     public void onBackClick(View view) {
         startActivity(MainActivity.showMainMenu);
         finish();
+    }
+
+    private static Application getStatic() throws Exception {
+        return (Application) Class.forName("android.app.AppGlobals")
+                .getMethod("getInitialApplication").invoke(null, (Object[]) null);
+
     }
 
 }
